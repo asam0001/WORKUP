@@ -56,8 +56,16 @@ export const DependencyTypeSchema = z.enum([
 ]);
 export type DependencyType = z.infer<typeof DependencyTypeSchema>;
 
-// Workspace status enum
-export const WorkspaceStatusSchema = z.enum(["PENDING", "RUNNING", "PAUSED", "TERMINATED"]);
+// Workspace status enum (Requested -> Provisioning -> Ready -> Running -> Idle -> Stopping -> Destroyed)
+export const WorkspaceStatusSchema = z.enum([
+  "Requested",
+  "Provisioning",
+  "Ready",
+  "Running",
+  "Idle",
+  "Stopping",
+  "Destroyed",
+]);
 export type WorkspaceStatus = z.infer<typeof WorkspaceStatusSchema>;
 
 // Submission status enum
@@ -241,3 +249,30 @@ export interface SessionPayload {
   name: string;
   sessionId: string;
 }
+
+// Workspace lifecycle and orchestration schemas
+export const WorkspaceProvisionInputSchema = z.object({
+  taskId: z.string().min(1, "Task ID is required"),
+  simulationId: z.string().min(1, "Simulation ID is required"),
+});
+export type WorkspaceProvisionInput = z.infer<typeof WorkspaceProvisionInputSchema>;
+
+export const WorkspaceExecuteInputSchema = z.object({
+  command: z.string().min(1, "Command is required"),
+  args: z.array(z.string()).default([]),
+  env: z.record(z.string()).default({}),
+});
+export type WorkspaceExecuteInput = z.infer<typeof WorkspaceExecuteInputSchema>;
+
+export const WorkspaceFileInputSchema = z.object({
+  path: z.string().min(1, "Path is required"),
+  content: z.string(),
+});
+export type WorkspaceFileInput = z.infer<typeof WorkspaceFileInputSchema>;
+
+export const WorkspaceSubmitInputSchema = z.object({
+  studentNotes: z.string().default(""),
+  branchName: z.string().default("feature/solution"),
+});
+export type WorkspaceSubmitInput = z.infer<typeof WorkspaceSubmitInputSchema>;
+

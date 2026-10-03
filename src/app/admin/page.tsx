@@ -88,6 +88,13 @@ export default async function AdminPage() {
 
         <div className="flex items-center gap-3">
           <Link
+            href="/admin/workspaces"
+            className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xs transition"
+          >
+            <Activity className="w-4 h-4" />
+            <span>Workspace Fleet</span>
+          </Link>
+          <Link
             href="/admin/authoring"
             className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xs transition"
           >

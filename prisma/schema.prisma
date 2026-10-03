@@ -292,6 +292,7 @@ model Task {
 
   skills                   TaskSkill[]
   submissions              Submission[]
+  workspaces               Workspace[]
   dependencies             TaskDependency[] @relation("TaskDependencies")
   dependents               TaskDependency[] @relation("DependentTasks")
 
@@ -330,15 +331,49 @@ model Workspace {
   user               User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   simulationId       String
   simulation         Simulation @relation(fields: [simulationId], references: [id], onDelete: Cascade)
-  status             String     @default("PENDING") // PENDING, RUNNING, PAUSED, TERMINATED
-  devcontainerConfig String? // JSON string
+  taskId             String?
+  task               Task?      @relation(fields: [taskId], references: [id], onDelete: SetNull)
+
+  // Lifecycle: Requested -> Provisioning -> Ready -> Running -> Idle -> Stopping -> Destroyed
+  status             String     @default("Requested")
+  devcontainerConfig String?    // JSON string
+
+  // Runtime connection
+  containerId        String?
+  connectionUrl      String?
+  connectionToken    String?
+  internalPort       Int?
+
+  // Resource limits
+  cpuLimit           Float      @default(2.0)
+  memoryLimitMb      Int        @default(4096)
+  diskLimitMb        Int        @default(10240)
+  maxRuntimeMinutes  Int        @default(120)
+  idleTimeoutMinutes Int        @default(30)
+  networkPolicy      String     @default("RESTRICTED") // ISOLATED, RESTRICTED, PROXY_ONLY
+
+  // Telemetry & Billing
+  currentCpuPercent  Float      @default(0.0)
+  currentMemoryMb    Float      @default(0.0)
+  currentDiskMb      Float      @default(0.0)
+  estimatedCost      Float      @default(0.0)
+
+  // Timestamps & Lifecycle events
+  startedAt          DateTime?
   lastActivityAt     DateTime   @default(now())
   expiresAt          DateTime?
+  terminatedAt       DateTime?
+  terminationReason  String?    // USER_DESTROY, IDLE_TIMEOUT, MAX_RUNTIME, SUBMISSION_COMPLETE, ADMIN_PURGE
+  failureReason      String?
+  artifactsStored    String?    // JSON array string of saved artifact metadata
+
   createdAt          DateTime   @default(now())
   updatedAt          DateTime   @updatedAt
 
   @@index([userId])
   @@index([simulationId])
+  @@index([taskId])
+  @@index([status])
 }
 
 model Submission {

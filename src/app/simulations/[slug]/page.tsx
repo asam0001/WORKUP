@@ -21,6 +21,7 @@ import {
   Sparkles,
   Cpu,
 } from "lucide-react";
+import { LaunchWorkspaceButton } from "@/components/launch-workspace-button";
 
 export const revalidate = 0;
 
@@ -333,6 +334,15 @@ export default async function SimulationDetailPage({
                             </span>
                           </div>
                         )}
+
+                        {/* Launch Cloud Workspace Button */}
+                        <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
+                          <LaunchWorkspaceButton
+                            taskId={task.id}
+                            simulationId={simulation.id}
+                            ticketKey={task.ticketKey}
+                          />
+                        </div>
                       </div>
                     );
                   })}
