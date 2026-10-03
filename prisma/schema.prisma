@@ -1,0 +1,349 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String          @id @default(cuid())
+  email        String          @unique
+  passwordHash String
+  name         String
+  role         String          @default("student") // student, content_author, reviewer, administrator
+  avatarUrl    String?
+  status       String          @default("active") // active, suspended
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  profile      Profile?
+  sessions     Session[]
+  workspaces   Workspace[]
+  submissions  Submission[]
+  evaluations  Evaluation[]
+  portfolio    PortfolioItem[]
+  auditLogs    AuditLog[]
+
+  @@index([email])
+  @@index([role])
+}
+
+model Profile {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  headline         String?
+  bio              String?
+  experienceLevel  String   @default("beginner") // beginner, intermediate, advanced
+  githubUsername   String?
+  linkedinUrl      String?
+  portfolioWebsite String?
+  preferences      String? // JSON string: notification settings, UI themes
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([userId])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([email])
+}
+
+model Profession {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  name         String
+  category     String // e.g. "Software Engineering", "AI & Machine Learning", "Cloud & DevOps"
+  description  String
+  icon         String?
+  isPublished  Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  roles        Role[]
+
+  @@index([slug])
+  @@index([category])
+}
+
+model Role {
+  id               String       @id @default(cuid())
+  professionId     String
+  profession       Profession   @relation(fields: [professionId], references: [id], onDelete: Cascade)
+  slug             String       @unique
+  title            String
+  level            String       @default("junior") // junior, mid, senior, lead
+  summary          String
+  description      String
+  marketDemand     String?
+  responsibilities String // JSON array string
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  skills           RoleSkill[]
+  simulations      Simulation[]
+
+  @@index([slug])
+  @@index([professionId])
+}
+
+model Skill {
+  id          String      @id @default(cuid())
+  name        String
+  slug        String      @unique
+  category    String // Language, Framework, Database, DevOps, Architecture, MLOps
+  description String?
+  icon        String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  roles       RoleSkill[]
+  taskSkills  TaskSkill[]
+
+  @@index([slug])
+  @@index([category])
+}
+
+model RoleSkill {
+  roleId  String
+  role    Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  skillId String
+  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, skillId])
+}
+
+model Company {
+  id                   String       @id @default(cuid())
+  name                 String
+  slug                 String       @unique
+  industry             String // Fintech, E-Commerce, Healthtech, Cloud Infrastructure
+  size                 String // Series B (85 employees), Enterprise (5000+)
+  description          String
+  culture              String?
+  techStack            String // JSON array string
+  logoUrl              String?
+  architectureOverview String? // Markdown summary
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+  teams                Team[]
+  simulations          Simulation[]
+
+  @@index([slug])
+}
+
+model Team {
+  id            String       @id @default(cuid())
+  companyId     String
+  company       Company      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  name          String
+  charter       String
+  leadName      String
+  leadRole      String
+  slackChannels String? // JSON array string
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  simulations   Simulation[]
+
+  @@index([companyId])
+}
+
+model Simulation {
+  id                    String          @id @default(cuid())
+  roleId                String
+  role                  Role            @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  companyId             String
+  company               Company         @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  teamId                String
+  team                  Team            @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  title                 String
+  slug                  String          @unique
+  summary               String
+  businessScenario      String // Markdown context of business problem
+  difficulty            String          @default("intermediate") // beginner, intermediate, advanced
+  estimatedHours        Int             @default(4)
+  prerequisiteKnowledge String? // JSON array string
+  isPublished           Boolean         @default(true)
+  version               String          @default("1.0.0")
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+  projects              Project[]
+  workspaces            Workspace[]
+  portfolioItems        PortfolioItem[]
+
+  @@index([slug])
+  @@index([roleId])
+  @@index([companyId])
+}
+
+model Project {
+  id                         String   @id @default(cuid())
+  simulationId               String
+  simulation                 Simulation @relation(fields: [simulationId], references: [id], onDelete: Cascade)
+  title                      String
+  slug                       String
+  orderIndex                 Int      @default(0)
+  businessObjective          String
+  architectureDecisionRecord String? // ADR markdown
+  repositoryTemplateUrl      String?
+  stagingUrl                 String?
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+  tasks                      Task[]
+
+  @@index([simulationId])
+}
+
+model Task {
+  id                 String           @id @default(cuid())
+  projectId          String
+  project            Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title              String
+  slug               String
+  orderIndex         Int              @default(0)
+  ticketKey          String // e.g. "FF-104", "OR-201"
+  type               String // INVESTIGATION, IMPLEMENTATION, TESTING, CODE_REVIEW, DEPLOYMENT, MONITORING_INCIDENT
+  description        String
+  acceptanceCriteria String // JSON array string
+  estimatedMinutes   Int              @default(45)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  skills             TaskSkill[]
+  submissions        Submission[]
+  dependencies       TaskDependency[] @relation("TaskDependencies")
+  dependents         TaskDependency[] @relation("DependentTasks")
+
+  @@index([projectId])
+  @@index([ticketKey])
+}
+
+model TaskSkill {
+  taskId  String
+  task    Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  skillId String
+  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@id([taskId, skillId])
+}
+
+model TaskDependency {
+  id             String @id @default(cuid())
+  taskId         String
+  task           Task   @relation("TaskDependencies", fields: [taskId], references: [id], onDelete: Cascade)
+  dependsOnTaskId String
+  dependsOnTask  Task   @relation("DependentTasks", fields: [dependsOnTaskId], references: [id], onDelete: Cascade)
+  dependencyType String @default("BLOCKS") // BLOCKS, OPTIONAL
+
+  @@unique([taskId, dependsOnTaskId])
+}
+
+model Workspace {
+  id                 String     @id @default(cuid())
+  userId             String
+  user               User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  simulationId       String
+  simulation         Simulation @relation(fields: [simulationId], references: [id], onDelete: Cascade)
+  status             String     @default("PENDING") // PENDING, RUNNING, PAUSED, TERMINATED
+  devcontainerConfig String? // JSON string
+  lastActivityAt     DateTime   @default(now())
+  expiresAt          DateTime?
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+
+  @@index([userId])
+  @@index([simulationId])
+}
+
+model Submission {
+  id                String       @id @default(cuid())
+  taskId            String
+  task              Task         @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  userId            String
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  branchName        String?
+  pullRequestNumber Int?
+  pullRequestUrl    String?
+  commitSha         String?
+  status            String       @default("DRAFT") // DRAFT, SUBMITTED, IN_REVIEW, APPROVED, REJECTED
+  diffSummary       String?
+  studentNotes      String?
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  evaluations       Evaluation[]
+
+  @@index([taskId])
+  @@index([userId])
+}
+
+model Evaluation {
+  id           String     @id @default(cuid())
+  submissionId String
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  reviewerId   String?
+  reviewer     User?      @relation(fields: [reviewerId], references: [id], onDelete: SetNull)
+  isAiReview   Boolean    @default(true)
+  score        Int? // 0-100
+  rubricScores String? // JSON string
+  feedback     String // Structured markdown review
+  status       String     @default("COMPLETED") // PENDING, COMPLETED
+  approved     Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+
+  @@index([submissionId])
+}
+
+model PortfolioItem {
+  id                  String     @id @default(cuid())
+  userId              String
+  user                User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  simulationId        String
+  simulation          Simulation @relation(fields: [simulationId], references: [id], onDelete: Cascade)
+  title               String
+  slug                String
+  summary             String
+  verificationDossier String // JSON string: cryptographic audit trail
+  repositoryUrl       String?
+  liveDemoUrl         String?
+  skillsAcquired      String // JSON array string
+  isPublic            Boolean    @default(true)
+  publishedAt         DateTime   @default(now())
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+
+  @@index([userId])
+  @@index([simulationId])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action     String // USER_REGISTERED, LOGIN_SUCCESS, PR_SUBMITTED, etc.
+  entityType String // User, Submission, Workspace, etc.
+  entityId   String?
+  metadata   String? // JSON string
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([entityType])
+}
