@@ -2,6 +2,8 @@ import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError, handleApiError } from "@/lib/api-response";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { slug: string } }
@@ -24,7 +26,7 @@ export async function GET(
             },
           },
         },
-        projects: {
+        phases: {
           orderBy: { orderIndex: "asc" },
           include: {
             tasks: {
@@ -42,6 +44,7 @@ export async function GET(
                         id: true,
                         ticketKey: true,
                         title: true,
+                        difficulty: true,
                       },
                     },
                   },

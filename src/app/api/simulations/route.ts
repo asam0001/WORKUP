@@ -9,10 +9,11 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const difficulty = searchParams.get("difficulty");
     const professionSlug = searchParams.get("profession");
+    const status = searchParams.get("status") || "published";
 
     const simulations = await prisma.simulation.findMany({
       where: {
-        isPublished: true,
+        status,
         ...(difficulty ? { difficulty } : {}),
         ...(professionSlug
           ? {
@@ -32,7 +33,8 @@ export async function GET(req: NextRequest) {
             profession: true,
           },
         },
-        projects: {
+        phases: {
+          orderBy: { orderIndex: "asc" },
           include: {
             tasks: {
               select: {
@@ -40,7 +42,9 @@ export async function GET(req: NextRequest) {
                 ticketKey: true,
                 title: true,
                 type: true,
+                difficulty: true,
                 estimatedMinutes: true,
+                status: true,
               },
             },
           },

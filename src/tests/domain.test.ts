@@ -19,18 +19,18 @@ describe("Domain Model & Entities Integrity", () => {
     expect(swe).toBeDefined();
     expect(swe?.roles.length).toBeGreaterThanOrEqual(1);
 
-    const ml = professions.find((p) => p.slug === "ai-machine-learning");
+    const ml = professions.find((p) => p.slug === "machine-learning-engineering");
     expect(ml).toBeDefined();
     expect(ml?.roles.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("should have simulations with projects, tasks, and task dependencies", async () => {
+  it("should have simulations with phases, tasks, and task dependencies", async () => {
     const simulation = await prisma.simulation.findFirst({
       where: { slug: "payment-webhook-idempotency-and-optimization" },
       include: {
         company: true,
         team: true,
-        projects: {
+        phases: {
           include: {
             tasks: {
               include: {
@@ -45,14 +45,32 @@ describe("Domain Model & Entities Integrity", () => {
     expect(simulation).toBeDefined();
     expect(simulation?.company.slug).toBe("finflow");
     expect(simulation?.team.leadName).toBe("Sarah Chen");
-    expect(simulation?.projects.length).toBeGreaterThanOrEqual(1);
+    expect(simulation?.phases.length).toBeGreaterThanOrEqual(1);
 
-    const tasks = simulation?.projects[0]?.tasks || [];
-    expect(tasks.length).toBe(4);
+    const tasks = simulation?.phases[0]?.tasks || [];
+    expect(tasks.length).toBe(2);
 
     // Verify task dependency structure
     const task2 = tasks.find((t) => t.ticketKey === "FF-105");
     expect(task2?.dependencies.length).toBe(1);
+  });
+
+  it("should verify the flagship ML Engineer simulation has 3 phases and 6 tasks", async () => {
+    const mlSim = await prisma.simulation.findFirst({
+      where: { slug: "fraud-detection-drift-mitigation-and-registry-governance" },
+      include: {
+        phases: {
+          include: {
+            tasks: true,
+          },
+        },
+      },
+    });
+
+    expect(mlSim).toBeDefined();
+    expect(mlSim?.phases.length).toBe(3);
+    const totalTasks = mlSim?.phases.reduce((sum, phase) => sum + phase.tasks.length, 0);
+    expect(totalTasks).toBe(6);
   });
 
   it("should have seeded user accounts for all 4 supported roles", async () => {

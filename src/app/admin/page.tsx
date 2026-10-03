@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { canAccessAdmin } from "@/lib/rbac";
 import { prisma } from "@/lib/prisma";
-import { Shield, Users, Briefcase, FileText, Activity, AlertTriangle, Clock } from "lucide-react";
+import { Shield, Users, Briefcase, FileText, Activity, AlertTriangle, Clock, Layers } from "lucide-react";
 import { RoleBadge } from "@/components/role-badge";
 import { formatDate, formatTimeAgo } from "@/lib/utils";
 
@@ -86,8 +86,17 @@ export default async function AdminPage() {
           </div>
         </div>
 
-        <div className="text-xs text-gray-400 font-mono">
-          Security Level: High (RBAC Enforced)
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin/authoring"
+            className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xs transition"
+          >
+            <Layers className="w-4 h-4" />
+            <span>Content Authoring Studio</span>
+          </Link>
+          <div className="text-xs text-gray-400 font-mono hidden sm:inline">
+            Security: High (RBAC)
+          </div>
         </div>
       </div>
 

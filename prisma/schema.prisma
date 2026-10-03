@@ -68,43 +68,69 @@ model PasswordResetToken {
   @@index([email])
 }
 
-model Profession {
-  id           String   @id @default(cuid())
-  slug         String   @unique
+// 1. Career Family (e.g. "Data & Artificial Intelligence", "Engineering & Architecture")
+model CareerFamily {
+  id           String       @id @default(cuid())
+  slug         String       @unique
   name         String
-  category     String // e.g. "Software Engineering", "AI & Machine Learning", "Cloud & DevOps"
   description  String
   icon         String?
-  isPublished  Boolean  @default(true)
-  displayOrder Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  roles        Role[]
+  displayOrder Int          @default(0)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  professions  Profession[]
 
   @@index([slug])
-  @@index([category])
 }
 
+// 2. Profession (e.g. "Machine Learning Engineering", "Software Engineering")
+model Profession {
+  id             String        @id @default(cuid())
+  careerFamilyId String?
+  careerFamily   CareerFamily? @relation(fields: [careerFamilyId], references: [id], onDelete: SetNull)
+  slug           String        @unique
+  name           String
+  category       String
+  description    String
+  icon           String?
+  status         String        @default("published") // draft, review, approved, published, archived
+  isPublished    Boolean       @default(true)
+  displayOrder   Int           @default(0)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  roles          Role[]
+  tasks          Task[]
+
+  @@index([slug])
+  @@index([careerFamilyId])
+  @@index([status])
+}
+
+// 3. Role (e.g. "Associate MLOps Engineer", "Junior Backend Engineer")
 model Role {
   id               String       @id @default(cuid())
   professionId     String
   profession       Profession   @relation(fields: [professionId], references: [id], onDelete: Cascade)
   slug             String       @unique
   title            String
-  level            String       @default("junior") // junior, mid, senior, lead
+  level            String       @default("junior") // junior, mid, senior, lead, principal
   summary          String
   description      String
   marketDemand     String?
   responsibilities String // JSON array string
+  status           String       @default("published") // draft, review, approved, published, archived
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
   skills           RoleSkill[]
   simulations      Simulation[]
+  tasks            Task[]
 
   @@index([slug])
   @@index([professionId])
+  @@index([status])
 }
 
+// 4. Skill
 model Skill {
   id          String      @id @default(cuid())
   name        String
@@ -130,6 +156,7 @@ model RoleSkill {
   @@id([roleId, skillId])
 }
 
+// 5. Company (e.g. "OmniRetail Marketplace", "FinFlow Technologies")
 model Company {
   id                   String       @id @default(cuid())
   name                 String
@@ -145,10 +172,12 @@ model Company {
   updatedAt            DateTime     @updatedAt
   teams                Team[]
   simulations          Simulation[]
+  tasks                Task[]
 
   @@index([slug])
 }
 
+// 6. Team (e.g. "ML Platform & Governance", "Core Payments Platform")
 model Team {
   id            String       @id @default(cuid())
   companyId     String
@@ -165,6 +194,7 @@ model Team {
   @@index([companyId])
 }
 
+// 7. Simulation
 model Simulation {
   id                    String          @id @default(cuid())
   roleId                String
@@ -177,61 +207,98 @@ model Simulation {
   slug                  String          @unique
   summary               String
   businessScenario      String // Markdown context of business problem
-  difficulty            String          @default("intermediate") // beginner, intermediate, advanced
+  difficulty            String          @default("Production simulation") // Guided, Assisted, Independent, Production simulation, Ownership
   estimatedHours        Int             @default(4)
   prerequisiteKnowledge String? // JSON array string
+  status                String          @default("published") // draft, review, approved, published, archived
   isPublished           Boolean         @default(true)
   version               String          @default("1.0.0")
   createdAt             DateTime        @default(now())
   updatedAt             DateTime        @updatedAt
-  projects              Project[]
+  phases                Phase[]
   workspaces            Workspace[]
   portfolioItems        PortfolioItem[]
 
   @@index([slug])
   @@index([roleId])
   @@index([companyId])
+  @@index([status])
 }
 
-model Project {
-  id                         String   @id @default(cuid())
+// 8. Phase (Sprint / Phase within Simulation)
+model Phase {
+  id                         String     @id @default(cuid())
   simulationId               String
   simulation                 Simulation @relation(fields: [simulationId], references: [id], onDelete: Cascade)
   title                      String
   slug                       String
-  orderIndex                 Int      @default(0)
+  orderIndex                 Int        @default(0)
+  summary                    String?
   businessObjective          String
   architectureDecisionRecord String? // ADR markdown
   repositoryTemplateUrl      String?
   stagingUrl                 String?
-  createdAt                  DateTime @default(now())
-  updatedAt                  DateTime @updatedAt
+  status                     String     @default("published") // draft, review, approved, published, archived
+  createdAt                  DateTime   @default(now())
+  updatedAt                  DateTime   @updatedAt
   tasks                      Task[]
 
   @@index([simulationId])
+  @@index([status])
 }
 
+// 9. Task (Reusable, rich data-driven structure)
 model Task {
-  id                 String           @id @default(cuid())
-  projectId          String
-  project            Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  title              String
-  slug               String
-  orderIndex         Int              @default(0)
-  ticketKey          String // e.g. "FF-104", "OR-201"
-  type               String // INVESTIGATION, IMPLEMENTATION, TESTING, CODE_REVIEW, DEPLOYMENT, MONITORING_INCIDENT
-  description        String
-  acceptanceCriteria String // JSON array string
-  estimatedMinutes   Int              @default(45)
-  createdAt          DateTime         @default(now())
-  updatedAt          DateTime         @updatedAt
-  skills             TaskSkill[]
-  submissions        Submission[]
-  dependencies       TaskDependency[] @relation("TaskDependencies")
-  dependents         TaskDependency[] @relation("DependentTasks")
+  id                       String           @id @default(cuid())
+  phaseId                  String
+  phase                    Phase            @relation(fields: [phaseId], references: [id], onDelete: Cascade)
+  professionId             String?
+  profession               Profession?      @relation(fields: [professionId], references: [id], onDelete: SetNull)
+  roleId                   String?
+  role                     Role?            @relation(fields: [roleId], references: [id], onDelete: SetNull)
+  companyId                String?
+  company                  Company?         @relation(fields: [companyId], references: [id], onDelete: SetNull)
 
-  @@index([projectId])
+  ticketKey                String // e.g. "ML-101", "FF-104"
+  title                    String
+  slug                     String
+  orderIndex               Int              @default(0)
+  type                     String // INVESTIGATION, IMPLEMENTATION, TESTING, CODE_REVIEW, DEPLOYMENT, MONITORING_INCIDENT
+  difficulty               String           @default("Production simulation") // Guided, Assisted, Independent, Production simulation, Ownership
+
+  businessContext          String // Markdown explanation of business impact
+  objective                String // Primary mission statement
+  prerequisites            String? // JSON array of required knowledge / task prerequisites
+  tools                    String? // JSON array of tools: ["Python", "MLflow", "Docker", "Evidently AI"]
+
+  environmentConfiguration String? // JSON object: container runtime, base image, cpu, ram, envVars, ports, services
+  startingState            String? // JSON object: branch, templateRepo, initialFiles, seedDatasets, dirtyStateDescription
+  requirements             String? // JSON array of technical specifications
+  constraints              String? // JSON array of latency, SLA, resource, and architectural constraints
+  deliverables             String? // JSON array of deliverables expected from the student
+
+  automatedTests           String? // JSON object: command, testFiles, timeoutSec
+  hiddenTests              String? // JSON object: evaluation test suites & acceptance benchmarks
+  rubric                   String? // JSON array: criteria, weight, evaluation guidelines
+  mentorConfiguration      String? // JSON object: AI persona guidelines, strictness, allowable hints
+  failureScenarios         String? // JSON array: synthetic incident / alert triggers
+  completionCriteria       String? // JSON array: exact conditions to unlock next task or complete phase
+  portfolioEvidence        String? // JSON object: schema for verified evidence dossier
+
+  status                   String           @default("published") // draft, review, approved, published, archived
+  estimatedMinutes         Int              @default(45)
+  createdAt                DateTime         @default(now())
+  updatedAt                DateTime         @updatedAt
+
+  skills                   TaskSkill[]
+  submissions              Submission[]
+  dependencies             TaskDependency[] @relation("TaskDependencies")
+  dependents               TaskDependency[] @relation("DependentTasks")
+
+  @@index([phaseId])
   @@index([ticketKey])
+  @@index([status])
+  @@index([difficulty])
 }
 
 model TaskSkill {
@@ -243,13 +310,16 @@ model TaskSkill {
   @@id([taskId, skillId])
 }
 
+// 10. Task Dependencies (Prerequisites, Sequential, Branching, Unlock & Completion conditions)
 model TaskDependency {
-  id             String @id @default(cuid())
-  taskId         String
-  task           Task   @relation("TaskDependencies", fields: [taskId], references: [id], onDelete: Cascade)
-  dependsOnTaskId String
-  dependsOnTask  Task   @relation("DependentTasks", fields: [dependsOnTaskId], references: [id], onDelete: Cascade)
-  dependencyType String @default("BLOCKS") // BLOCKS, OPTIONAL
+  id                  String  @id @default(cuid())
+  taskId              String
+  task                Task    @relation("TaskDependencies", fields: [taskId], references: [id], onDelete: Cascade)
+  dependsOnTaskId     String
+  dependsOnTask       Task    @relation("DependentTasks", fields: [dependsOnTaskId], references: [id], onDelete: Cascade)
+  dependencyType      String  @default("PREREQUISITE") // PREREQUISITE, SEQUENTIAL, BRANCHING, OPTIONAL
+  unlockCondition     String? // JSON string: e.g. { "minScore": 80, "branch": "A" }
+  completionCondition String? // JSON string: e.g. { "testCoverageMin": 85 }
 
   @@unique([taskId, dependsOnTaskId])
 }
@@ -336,7 +406,7 @@ model AuditLog {
   userId     String?
   user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   action     String // USER_REGISTERED, LOGIN_SUCCESS, PR_SUBMITTED, etc.
-  entityType String // User, Submission, Workspace, etc.
+  entityType String // User, Submission, Workspace, Simulation, Task, etc.
   entityId   String?
   metadata   String? // JSON string
   ipAddress  String?
