@@ -111,17 +111,24 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center flex-wrap gap-2.5">
+          <Link
+            href="/demo"
+            className="inline-flex items-center space-x-1.5 bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl transition"
+          >
+            <Play className="w-3.5 h-3.5 fill-blue-600" />
+            <span>Watch Demo</span>
+          </Link>
           <Link
             href="/careers"
-            className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-xs transition"
+            className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl shadow-xs transition"
           >
             <Briefcase className="w-4 h-4" />
             <span>Browse Careers</span>
           </Link>
           <Link
             href="/portfolio"
-            className="inline-flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-sm font-semibold px-4 py-2.5 rounded-xl transition"
+            className="inline-flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl transition"
           >
             <Award className="w-4 h-4" />
             <span>My Portfolio</span>

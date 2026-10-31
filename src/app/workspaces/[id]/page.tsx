@@ -23,7 +23,15 @@ import {
   DollarSign,
   Shield,
   Layers,
+  Sparkles,
+  BookOpen,
+  PanelRightClose,
+  PanelRightOpen,
+  RotateCcw,
 } from "lucide-react";
+import { MissionGuidance } from "@/components/mission-guidance";
+import { AiHelpdesk } from "@/components/ai-helpdesk";
+import { FirstMissionOnboarding } from "@/components/first-mission-onboarding";
 
 interface FileEntry {
   path: string;
@@ -72,6 +80,8 @@ export default function WorkspaceWorkbenchPage() {
 
   // Tab State: 'terminal' | 'tests' | 'brief'
   const [bottomTab, setBottomTab] = useState<"terminal" | "tests" | "brief">("terminal");
+  const [isGuidanceOpen, setIsGuidanceOpen] = useState(true);
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
 
   // Submit Modal
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
@@ -383,6 +393,28 @@ export default function WorkspaceWorkbenchPage() {
           </div>
 
           <button
+            onClick={() => setIsOnboardingOpen(true)}
+            className="hidden sm:inline-flex items-center space-x-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white text-xs font-medium px-2.5 py-1.5 rounded-lg border border-gray-700/80 transition"
+            title="Replay Onboarding Guide"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <span>Tour</span>
+          </button>
+
+          <button
+            onClick={() => setIsGuidanceOpen(!isGuidanceOpen)}
+            className={`inline-flex items-center space-x-1.5 text-xs font-medium px-2.5 py-1.5 rounded-lg border transition ${
+              isGuidanceOpen
+                ? "bg-blue-900/40 text-blue-300 border-blue-700"
+                : "bg-gray-800 text-gray-300 border-gray-700 hover:text-white"
+            }`}
+            title="Toggle Mission Guidance Panel"
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span className="hidden md:inline">Mission Guide</span>
+          </button>
+
+          <button
             onClick={handleRunTests}
             disabled={isRunningTests}
             className="inline-flex items-center space-x-1.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-xs transition"
@@ -658,6 +690,18 @@ export default function WorkspaceWorkbenchPage() {
             )}
           </div>
         </div>
+
+        {/* Right Sidebar: Mission Guidance System */}
+        {isGuidanceOpen && task && (
+          <aside className="w-80 lg:w-96 shrink-0 border-l border-gray-800 overflow-hidden flex flex-col bg-gray-900">
+            <MissionGuidance
+              task={task}
+              company={simulation?.company}
+              teamLead={simulation?.team}
+              onSelectFile={(filePath) => loadFileContent(filePath)}
+            />
+          </aside>
+        )}
       </div>
 
       {/* 4. SUBMIT MODAL */}
@@ -705,6 +749,25 @@ export default function WorkspaceWorkbenchPage() {
           </div>
         </div>
       )}
+
+      {/* 5. Floating AI Helpdesk */}
+      {task && (
+        <AiHelpdesk
+          taskId={task.id}
+          ticketKey={task.ticketKey}
+          taskTitle={task.title}
+          department={task.department || simulation?.team?.name}
+          activeFilePath={activeFilePath}
+          testResult={testResult}
+          onOpenFile={(filePath) => loadFileContent(filePath)}
+        />
+      )}
+
+      {/* 6. First Mission Guided Onboarding Tour */}
+      <FirstMissionOnboarding
+        forceOpen={isOnboardingOpen}
+        onClose={() => setIsOnboardingOpen(false)}
+      />
     </div>
   );
 }

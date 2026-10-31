@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Terminal, User, LogOut, LayoutDashboard, Compass, Shield, Award } from "lucide-react";
+import { Terminal, User, LogOut, LayoutDashboard, Compass, Shield, Award, Building, BookOpen, Play, CheckCircle2 } from "lucide-react";
 import { RoleBadge } from "./role-badge";
 
 interface CurrentUser {
@@ -62,13 +62,34 @@ export function Navbar() {
               </span>
             </Link>
 
-            <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-700">
+            <div className="hidden md:flex items-center space-x-5 text-sm font-medium text-gray-700">
+              <Link
+                href="/demo"
+                className="flex items-center space-x-1.5 text-blue-600 hover:text-blue-700 transition"
+              >
+                <Play className="w-3.5 h-3.5 fill-blue-600" />
+                <span>Watch Demo</span>
+              </Link>
               <Link
                 href="/careers"
                 className="flex items-center space-x-1.5 hover:text-blue-600 transition"
               >
                 <Compass className="w-4 h-4" />
-                <span>Professions & Tracks</span>
+                <span>Missions</span>
+              </Link>
+              <Link
+                href="/companies"
+                className="flex items-center space-x-1.5 hover:text-blue-600 transition"
+              >
+                <Building className="w-4 h-4" />
+                <span>Companies</span>
+              </Link>
+              <Link
+                href="/resources"
+                className="flex items-center space-x-1.5 hover:text-blue-600 transition"
+              >
+                <BookOpen className="w-4 h-4" />
+                <span>Resources</span>
               </Link>
               {user && (
                 <>
@@ -88,13 +109,13 @@ export function Navbar() {
                   </Link>
                 </>
               )}
-              {user?.role === "administrator" && (
+              {(user?.role === "administrator" || user?.role === "content_author") && (
                 <Link
                   href="/admin"
-                  className="flex items-center space-x-1.5 text-rose-600 hover:text-rose-700 transition"
+                  className="flex items-center space-x-1.5 text-rose-600 hover:text-rose-700 transition font-semibold"
                 >
                   <Shield className="w-4 h-4" />
-                  <span>Admin Panel</span>
+                  <span>{user.role === "administrator" ? "Admin Panel" : "Author Studio"}</span>
                 </Link>
               )}
             </div>

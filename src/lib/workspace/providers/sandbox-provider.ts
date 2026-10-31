@@ -566,6 +566,225 @@ def test_shifted_distributions_detects_drift():
 `,
         "utf-8"
       );
+    } else if (ticket.startsWith("FF-001") || ticket === "FF-001") {
+      // 1. FinFlow Technologies Mission #001: Fix login email validation issue
+      await fs.mkdir(path.join(rootDir, "src", "auth"), { recursive: true });
+      await fs.mkdir(path.join(rootDir, "tests"), { recursive: true });
+      await fs.mkdir(path.join(rootDir, "docs"), { recursive: true });
+
+      await fs.writeFile(
+        path.join(rootDir, "README.md"),
+        `# FinFlow Technologies: Login Email Validation Fix (${ticket})
+**Company:** FinFlow Technologies  
+**Department:** Backend Engineering  
+**Tech Lead:** Alex Rivera  
+**Difficulty:** Beginner (10-20 mins)
+
+## Mission Scenario
+Customers are reporting that the login API accepts empty email strings, creating corrupted session tokens.
+Your team lead, Alex Rivera, has assigned you ticket **FF-001** to investigate and fix this validation flaw.
+
+## Instructions
+1. Open \`src/auth/validator.py\` in the editor.
+2. Locate \`validate_login_input(email, password)\`.
+3. Update the logic to reject empty strings, whitespace-only emails, and emails missing '@'.
+4. Click **Run Tests** (or run \`python tests/test_validator.py\` in the terminal).
+5. Once all 5 tests pass, click **Submit Work** in the top bar!
+
+## Expected Outcome
+- Empty or whitespace email inputs return \`{"valid": False, "error": "Email cannot be empty"}\`
+- Emails missing '@' return \`{"valid": False, "error": "Invalid email format"}\`
+- Valid emails return \`{"valid": True, "error": None}\`
+- All 5 automated unit tests pass.
+`,
+        "utf-8"
+      );
+
+      await fs.writeFile(
+        path.join(rootDir, "src", "auth", "validator.py"),
+        `"""
+FinFlow Technologies - Backend Engineering (Mission #001)
+Ticket: FF-001 - Fix login email validation issue
+"""
+
+def validate_login_input(email: str, password: str) -> dict:
+    """
+    Validates user credentials before processing authentication.
+    
+    Expected behavior:
+    - Email must NOT be empty or whitespace-only
+    - Email must contain an '@' symbol and a valid domain
+    - Password must not be empty
+    
+    Returns:
+        dict: {"valid": bool, "error": str | None}
+    """
+    if not password or len(password.strip()) == 0:
+        return {"valid": False, "error": "Password cannot be empty"}
+
+    # BUG TO FIX: The function currently accepts empty or whitespace-only strings!
+    # Update this logic to reject empty emails and verify valid email format.
+    if email is None:
+        return {"valid": False, "error": "Email is required"}
+
+    # Erroneous placeholder logic that accepts any email string:
+    return {"valid": True, "error": None}
+`,
+        "utf-8"
+      );
+
+      await fs.writeFile(
+        path.join(rootDir, "tests", "test_validator.py"),
+        `import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from src.auth.validator import validate_login_input
+
+def test_empty_email_rejected():
+    result = validate_login_input("", "Secur3P@ss")
+    assert result["valid"] is False, "Empty email should be rejected"
+    assert result.get("error") is not None
+
+def test_whitespace_email_rejected():
+    result = validate_login_input("   ", "Secur3P@ss")
+    assert result["valid"] is False, "Whitespace email should be rejected"
+
+def test_missing_at_symbol_rejected():
+    result = validate_login_input("invaliduser.com", "Secur3P@ss")
+    assert result["valid"] is False, "Email without '@' should be rejected"
+
+def test_valid_email_accepted():
+    result = validate_login_input("alex.student@finflow.dev", "Secur3P@ss")
+    assert result["valid"] is True, "Valid email should be accepted"
+    assert result.get("error") is None
+
+def test_empty_password_rejected():
+    result = validate_login_input("alex.student@finflow.dev", "")
+    assert result["valid"] is False, "Empty password should be rejected"
+
+if __name__ == "__main__":
+    tests = [
+        test_empty_email_rejected,
+        test_whitespace_email_rejected,
+        test_missing_at_symbol_rejected,
+        test_valid_email_accepted,
+        test_empty_password_rejected
+    ]
+    passed = 0
+    for t in tests:
+        try:
+            t()
+            print(f"✓ {t.__name__} PASSED")
+            passed += 1
+        except AssertionError as e:
+            print(f"✗ {t.__name__} FAILED: {e}")
+    print(f"\\nResults: {passed}/{len(tests)} tests passed.")
+    if passed < len(tests):
+        sys.exit(1)
+`,
+        "utf-8"
+      );
+    } else if (ticket.startsWith("NC-001")) {
+      // 2. Nova Commerce Mission #002: Fix broken checkout submit button
+      await fs.mkdir(path.join(rootDir, "src", "components"), { recursive: true });
+      await fs.mkdir(path.join(rootDir, "tests"), { recursive: true });
+
+      await fs.writeFile(
+        path.join(rootDir, "README.md"),
+        `# Nova Commerce: Fix Checkout Button State (${ticket})
+**Company:** Nova Commerce  
+**Department:** Web UX Engineering  
+**Difficulty:** Beginner (10 mins)
+
+Fix the boolean condition in \`src/components/CheckoutButton.py\` so that accepting terms enables the order button!
+`,
+        "utf-8"
+      );
+
+      await fs.writeFile(
+        path.join(rootDir, "src", "components", "CheckoutButton.py"),
+        `def get_button_state(terms_accepted: bool, is_submitting: bool) -> dict:
+    # BUG: Hardcoded 'True or' keeps the button disabled forever!
+    is_disabled = True or not terms_accepted or is_submitting
+    return {
+        "disabled": is_disabled,
+        "label": "Processing..." if is_submitting else "Place Order"
+    }
+`,
+        "utf-8"
+      );
+
+      await fs.writeFile(
+        path.join(rootDir, "tests", "test_checkout.py"),
+        `import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from src.components.CheckoutButton import get_button_state
+
+def test_terms_unchecked_disabled():
+    state = get_button_state(terms_accepted=False, is_submitting=False)
+    assert state["disabled"] is True
+
+def test_terms_checked_enabled():
+    state = get_button_state(terms_accepted=True, is_submitting=False)
+    assert state["disabled"] is False
+    assert state["label"] == "Place Order"
+
+if __name__ == "__main__":
+    test_terms_unchecked_disabled()
+    test_terms_checked_enabled()
+    print("All checkout tests PASSED!")
+`,
+        "utf-8"
+      );
+    } else if (ticket.startsWith("MLOG-001")) {
+      // 3. MetroLogistics Mission #003: Delivery turnaround times
+      await fs.mkdir(path.join(rootDir, "src", "analysis"), { recursive: true });
+      await fs.mkdir(path.join(rootDir, "data"), { recursive: true });
+      await fs.mkdir(path.join(rootDir, "tests"), { recursive: true });
+
+      await fs.writeFile(
+        path.join(rootDir, "data", "deliveries.json"),
+        JSON.stringify([
+          { "id": "PKG-01", "transit_hours": 4.5, "delayed": false },
+          { "id": "PKG-02", "transit_hours": 8.0, "delayed": true },
+          { "id": "PKG-03", "transit_hours": 3.5, "delayed": false },
+          { "id": "PKG-04", "transit_hours": 12.0, "delayed": true }
+        ], null, 2),
+        "utf-8"
+      );
+
+      await fs.writeFile(
+        path.join(rootDir, "src", "analysis", "delivery_metrics.py"),
+        `def calculate_metrics(deliveries: list[dict]) -> dict:
+    if not deliveries:
+        return {"avg_hours": 0.0, "delayed_count": 0}
+    # Calculate real average and delayed count
+    total_hours = sum(d["transit_hours"] for d in deliveries)
+    avg_hours = total_hours / len(deliveries)
+    delayed_count = sum(1 for d in deliveries if d.get("delayed", False))
+    return {"avg_hours": round(avg_hours, 2), "delayed_count": delayed_count}
+`,
+        "utf-8"
+      );
+
+      await fs.writeFile(
+        path.join(rootDir, "tests", "test_metrics.py"),
+        `import sys, os, json
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from src.analysis.delivery_metrics import calculate_metrics
+
+def test_delivery_calculations():
+    with open("data/deliveries.json") as f:
+        data = json.load(f)
+    metrics = calculate_metrics(data)
+    assert metrics["avg_hours"] == 7.0
+    assert metrics["delayed_count"] == 2
+    print("All metrics tests PASSED!")
+
+if __name__ == "__main__":
+    test_delivery_calculations()
+`,
+        "utf-8"
+      );
     } else {
       // Seed Generic Backend Service template
       await fs.mkdir(path.join(rootDir, "src"), { recursive: true });

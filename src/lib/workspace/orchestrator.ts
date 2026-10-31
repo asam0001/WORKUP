@@ -168,6 +168,28 @@ export class WorkspaceOrchestrator {
         },
       });
 
+      // Record initial Mission Outcome as IN_PROGRESS
+      try {
+        await prisma.missionOutcome.upsert({
+          where: {
+            userId_taskId: {
+              userId,
+              taskId: task.id,
+            },
+          },
+          update: {
+            status: "IN_PROGRESS",
+          },
+          create: {
+            userId,
+            taskId: task.id,
+            status: "IN_PROGRESS",
+          },
+        });
+      } catch (outcomeErr) {
+        console.error("Failed to update initial mission outcome:", outcomeErr);
+      }
+
       const metrics = await provider.getMetrics(containerId, defaultLimits, now);
 
       return {
@@ -334,6 +356,44 @@ export class WorkspaceOrchestrator {
     const result = await this.executeCommand(workspaceId, userId, cmd, args);
 
     const passed = result.exitCode === 0 && !result.timedOut;
+
+    // Record test results to MissionOutcome
+    if (workspace.taskId) {
+      try {
+        await prisma.missionOutcome.upsert({
+          where: {
+            userId_taskId: {
+              userId,
+              taskId: workspace.taskId,
+            },
+          },
+          update: {
+            testResults: JSON.stringify({
+              passed,
+              exitCode: result.exitCode,
+              stdout: result.stdout?.substring(0, 500),
+              stderr: result.stderr?.substring(0, 500),
+              durationMs: result.durationMs,
+            }),
+          },
+          create: {
+            userId,
+            taskId: workspace.taskId,
+            status: "IN_PROGRESS",
+            testResults: JSON.stringify({
+              passed,
+              exitCode: result.exitCode,
+              stdout: result.stdout?.substring(0, 500),
+              stderr: result.stderr?.substring(0, 500),
+              durationMs: result.durationMs,
+            }),
+          },
+        });
+      } catch (err) {
+        console.error("Failed to record test results to mission outcome:", err);
+      }
+    }
+
     return { ...result, passed };
   }
 
@@ -401,7 +461,42 @@ export class WorkspaceOrchestrator {
       console.error("Evaluation error during submitWork:", evalErr);
     }
 
-    // 5. Terminate workspace gracefully
+    // 5. Update MissionOutcome with final outcome and score
+    if (workspace.taskId) {
+      try {
+        const finalScore = evaluation?.score || (submission.status === "APPROVED" ? 90 : 65);
+        const finalOutcome = finalScore >= 70 ? "PASSED" : finalScore >= 50 ? "NEEDS_IMPROVEMENT" : "FAILED";
+
+        await prisma.missionOutcome.upsert({
+          where: {
+            userId_taskId: {
+              userId,
+              taskId: workspace.taskId,
+            },
+          },
+          update: {
+            status: finalOutcome,
+            score: finalScore,
+            feedback: evaluation?.feedback?.substring(0, 500) || "Completed and evaluated.",
+            submissionId: submission.id,
+            completedAt: new Date(),
+          },
+          create: {
+            userId,
+            taskId: workspace.taskId,
+            status: finalOutcome,
+            score: finalScore,
+            feedback: evaluation?.feedback?.substring(0, 500) || "Completed and evaluated.",
+            submissionId: submission.id,
+            completedAt: new Date(),
+          },
+        });
+      } catch (outcomeErr) {
+        console.error("Failed to update final mission outcome:", outcomeErr);
+      }
+    }
+
+    // 6. Terminate workspace gracefully
     await this.destroyWorkspace(workspaceId, userId, "SUBMISSION_COMPLETE");
 
     return {

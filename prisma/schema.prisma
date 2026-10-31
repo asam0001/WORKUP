@@ -21,9 +21,12 @@ model User {
   sessions     Session[]
   workspaces   Workspace[]
   submissions  Submission[]
-  evaluations  Evaluation[]
-  portfolio    PortfolioItem[]
-  auditLogs    AuditLog[]
+  evaluations      Evaluation[]
+  portfolio        PortfolioItem[]
+  auditLogs        AuditLog[]
+  authoredTasks    Task[]           @relation("AuthoredTasks")
+  missionOutcomes  MissionOutcome[]
+  helpdeskMessages HelpdeskMessage[]
 
   @@index([email])
   @@index([role])
@@ -285,6 +288,18 @@ model Task {
   completionCriteria       String? // JSON array: exact conditions to unlock next task or complete phase
   portfolioEvidence        String? // JSON object: schema for verified evidence dossier
 
+  // Mission Guidance System Additions
+  department               String? // e.g. "Backend Engineering", "Web UX", "Business Intelligence"
+  whyImportant             String? // Real-world explanation of why the business/customer relies on this task
+  stepByStepInstructions   String? // JSON array of step guidance
+  toolsAndFiles            String? // JSON array of target files & tools to use
+  expectedOutput           String? // Measurable criteria of success
+  submissionInstructions   String? // Simple instructions on how to submit
+  hints                    String? // JSON array of progressive hints
+
+  authorId                 String?
+  author                   User?            @relation("AuthoredTasks", fields: [authorId], references: [id], onDelete: SetNull)
+
   status                   String           @default("published") // draft, review, approved, published, archived
   estimatedMinutes         Int              @default(45)
   createdAt                DateTime         @default(now())
@@ -293,11 +308,14 @@ model Task {
   skills                   TaskSkill[]
   submissions              Submission[]
   workspaces               Workspace[]
+  missionOutcomes          MissionOutcome[]
+  helpdeskMessages         HelpdeskMessage[]
   dependencies             TaskDependency[] @relation("TaskDependencies")
   dependents               TaskDependency[] @relation("DependentTasks")
 
   @@index([phaseId])
   @@index([ticketKey])
+  @@index([authorId])
   @@index([status])
   @@index([difficulty])
 }
@@ -451,4 +469,41 @@ model AuditLog {
   @@index([userId])
   @@index([action])
   @@index([entityType])
+}
+
+// 11. Mission Outcome Tracking (Preserving learner progress, evaluation, tests, and final outcome)
+model MissionOutcome {
+  id             String    @id @default(cuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  taskId         String
+  task           Task      @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  status         String    @default("IN_PROGRESS") // NOT_STARTED, IN_PROGRESS, SUBMITTED, UNDER_REVIEW, PASSED, NEEDS_IMPROVEMENT, FAILED
+  score          Int?
+  testResults    String?   // JSON string of automated test summary
+  feedback       String?   // Reviewer feedback
+  submissionId   String?
+  startedAt      DateTime  @default(now())
+  completedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([userId, taskId])
+  @@index([userId])
+  @@index([taskId])
+  @@index([status])
+}
+
+// 12. Virtual Team Assistant (AI Helpdesk) interaction history
+model HelpdeskMessage {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  taskId    String
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  role      String   // "user" | "assistant"
+  content   String
+  createdAt DateTime @default(now())
+
+  @@index([userId, taskId])
 }

@@ -22,6 +22,8 @@ export function apiSuccess<T>(data: T, status = 200, headers?: HeadersInit): Nex
   );
 }
 
+export const successResponse = <T>(data: T, status = 200) => apiSuccess(data, status);
+
 export function apiError(
   message: string,
   status = 400,
@@ -41,6 +43,8 @@ export function apiError(
     { status }
   );
 }
+
+export const errorResponse = (code: string, message: string, status = 400) => apiError(message, status, code);
 
 export function handleApiError(err: unknown): NextResponse<ApiResponse<null>> {
   if (err instanceof ZodError) {
