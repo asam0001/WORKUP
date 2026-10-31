@@ -1,0 +1,43 @@
+flowchart TD
+    subgraph Presentation["Presentation Components (React 18 / Next.js 14)"]
+        Nav["navbar.tsx, role-badge"]
+        Career["profession-card.tsx"]
+        Backlog["simulation-card.tsx"]
+        Workbench["workspaces/[id]/page.tsx"]
+        Admin["admin/page.tsx"]
+    end
+
+    subgraph API["API Route Handlers (Typed Controllers)"]
+        A1["/api/auth/*"]
+        A2["/api/simulations/*"]
+        A3["/api/workspaces/*"]
+        A4["/api/profile/*"]
+        A5["/api/admin/*"]
+    end
+
+    subgraph Core["Core Business Services (src/lib)"]
+        C1["auth.ts, rbac.ts"]
+        C2["task-validator.ts"]
+        C3["orchestrator.ts"]
+        C4["api-response.ts"]
+        C5["logger.ts, env.ts"]
+    end
+
+    subgraph Exec["Sandbox Execution Engine"]
+        E1["sandbox-provider.ts"]
+        E2["Timeout & Process Spawner"]
+        E3["Vitest CLI Runner"]
+        E4["Git Diff Extractor"]
+    end
+
+    subgraph Storage["Persistence & Storage"]
+        S1["Prisma Client (prisma.ts)"]
+        S2["SQLite dev.db (21 tables)"]
+        S3[".workspaces/ Directory"]
+        S4[".artifacts/ Snapshots"]
+    end
+
+    Presentation --> API
+    API --> Core
+    Core --> Exec
+    Core --> Storage

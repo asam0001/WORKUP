@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 780" width="880" height="780">
+  <rect width="880" height="780" fill="#f8fafc" rx="8"/>
+
+  <!-- Class 1: User -->
+  <rect x="30" y="30" width="160" height="130" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1.5"/>
+  <rect x="30" y="30" width="160" height="24" rx="4" fill="#0284c7"/>
+  <text x="110" y="47" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">User</text>
+  <text x="38" y="70" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="38" y="85" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+email: String</text>
+  <text x="38" y="100" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+role: RoleEnum</text>
+  <text x="38" y="115" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+status: String</text>
+  <line x1="30" y1="123" x2="190" y2="123" stroke="#e2e8f0"/>
+  <text x="38" y="138" font-family="Courier, monospace" font-size="9.5" font-style="italic" fill="#0369a1" text-anchor="start">+hasPermission()</text>
+  <text x="38" y="152" font-family="Courier, monospace" font-size="9.5" font-style="italic" fill="#0369a1" text-anchor="start">+verifyPassword()</text>
+
+  <!-- Class 2: Profile -->
+  <rect x="30" y="210" width="160" height="100" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1.5"/>
+  <rect x="30" y="210" width="160" height="24" rx="4" fill="#0284c7"/>
+  <text x="110" y="227" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Profile</text>
+  <text x="38" y="250" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+userId: String</text>
+  <text x="38" y="265" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+headline: String</text>
+  <text x="38" y="280" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+experienceLevel: String</text>
+  <text x="38" y="295" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+githubUsername: String</text>
+
+  <line x1="110" y1="160" x2="110" y2="210" stroke="#64748b" stroke-width="1.5"/>
+  <text x="116" y="175" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">1</text>
+  <text x="116" y="202" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">1</text>
+
+  <!-- Class 3: Profession -->
+  <rect x="250" y="30" width="170" height="110" rx="4" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+  <rect x="250" y="30" width="170" height="24" rx="4" fill="#7c3aed"/>
+  <text x="335" y="47" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Profession</text>
+  <text x="258" y="70" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="258" y="85" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+slug: String</text>
+  <text x="258" y="100" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+name: String</text>
+  <text x="258" y="115" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+category: String</text>
+  <text x="258" y="130" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+status: String</text>
+
+  <!-- Class 4: Role -->
+  <rect x="250" y="190" width="170" height="120" rx="4" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+  <rect x="250" y="190" width="170" height="24" rx="4" fill="#7c3aed"/>
+  <text x="335" y="207" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Role</text>
+  <text x="258" y="230" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="258" y="245" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+professionId: String</text>
+  <text x="258" y="260" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+title: String</text>
+  <text x="258" y="275" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+level: String</text>
+  <text x="258" y="290" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+responsibilities: JSON</text>
+
+  <line x1="335" y1="140" x2="335" y2="190" stroke="#64748b" stroke-width="1.5"/>
+  <text x="341" y="155" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">1</text>
+  <text x="341" y="182" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">*</text>
+
+  <!-- Class 5: Skill -->
+  <rect x="250" y="360" width="170" height="95" rx="4" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+  <rect x="250" y="360" width="170" height="24" rx="4" fill="#7c3aed"/>
+  <text x="335" y="377" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Skill</text>
+  <text x="258" y="400" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="258" y="415" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+name: String</text>
+  <text x="258" y="430" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+slug: String</text>
+  <text x="258" y="445" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+category: String</text>
+
+  <line x1="335" y1="310" x2="335" y2="360" stroke="#64748b" stroke-width="1.5"/>
+  <text x="341" y="325" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">*</text>
+  <text x="341" y="352" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">*</text>
+
+  <!-- Class 6: Company -->
+  <rect x="490" y="30" width="175" height="110" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+  <rect x="490" y="30" width="175" height="24" rx="4" fill="#059669"/>
+  <text x="577" y="47" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Company</text>
+  <text x="498" y="70" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="498" y="85" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+name: String</text>
+  <text x="498" y="100" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+industry: String</text>
+  <text x="498" y="115" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+size: String</text>
+  <text x="498" y="130" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+techStack: JSON</text>
+
+  <!-- Class 7: Simulation -->
+  <rect x="490" y="190" width="175" height="120" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+  <rect x="490" y="190" width="175" height="24" rx="4" fill="#059669"/>
+  <text x="577" y="207" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Simulation</text>
+  <text x="498" y="230" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="498" y="245" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+companyId: String</text>
+  <text x="498" y="260" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+title: String</text>
+  <text x="498" y="275" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+difficulty: String</text>
+  <text x="498" y="290" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+estimatedHours: Int</text>
+
+  <line x1="577" y1="140" x2="577" y2="190" stroke="#64748b" stroke-width="1.5"/>
+  <text x="583" y="155" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">1</text>
+  <text x="583" y="182" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">*</text>
+
+  <line x1="420" y1="250" x2="490" y2="250" stroke="#64748b" stroke-width="1.5"/>
+  <text x="430" y="245" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">1</text>
+  <text x="475" y="245" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">*</text>
+
+  <!-- Class 8: Task -->
+  <rect x="490" y="360" width="175" height="135" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+  <rect x="490" y="360" width="175" height="24" rx="4" fill="#059669"/>
+  <text x="577" y="377" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Task</text>
+  <text x="498" y="400" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="498" y="415" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+ticketKey: String</text>
+  <text x="498" y="430" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+title: String</text>
+  <text x="498" y="445" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+type: TaskType</text>
+  <text x="498" y="460" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+automatedTests: JSON</text>
+  <text x="498" y="475" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+acceptanceRubric: JSON</text>
+
+  <line x1="577" y1="310" x2="577" y2="360" stroke="#64748b" stroke-width="1.5"/>
+  <text x="583" y="325" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">1</text>
+  <text x="583" y="352" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">*</text>
+
+  <!-- Class 9: Workspace -->
+  <rect x="30" y="370" width="160" height="130" rx="4" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+  <rect x="30" y="370" width="160" height="24" rx="4" fill="#d97706"/>
+  <text x="110" y="387" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Workspace</text>
+  <text x="38" y="410" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="38" y="425" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+userId: String</text>
+  <text x="38" y="440" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+status: StatusEnum</text>
+  <text x="38" y="455" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+cpuLimit: Float</text>
+  <text x="38" y="470" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+memoryLimitMb: Int</text>
+  <line x1="30" y1="478" x2="190" y2="478" stroke="#e2e8f0"/>
+  <text x="38" y="492" font-family="Courier, monospace" font-size="9.5" font-style="italic" fill="#b45309" text-anchor="start">+provisionSandbox()</text>
+
+  <path d="M 110 160 L 110 370" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  <text x="116" y="340" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">*</text>
+
+  <!-- Class 10: Submission -->
+  <rect x="490" y="550" width="175" height="115" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <rect x="490" y="550" width="175" height="24" rx="4" fill="#dc2626"/>
+  <text x="577" y="567" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Submission</text>
+  <text x="498" y="590" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="498" y="605" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+taskId: String</text>
+  <text x="498" y="620" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+commitSha: String</text>
+  <text x="498" y="635" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+diffSummary: String</text>
+  <text x="498" y="650" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+status: PRStatus</text>
+
+  <line x1="577" y1="495" x2="577" y2="550" stroke="#64748b" stroke-width="1.5"/>
+  <text x="583" y="515" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">1</text>
+  <text x="583" y="542" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">*</text>
+
+  <!-- Class 11: Evaluation -->
+  <rect x="250" y="550" width="170" height="115" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <rect x="250" y="550" width="170" height="24" rx="4" fill="#dc2626"/>
+  <text x="335" y="567" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Evaluation</text>
+  <text x="258" y="590" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="258" y="605" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+submissionId: String</text>
+  <text x="258" y="620" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+score: Int (0-100)</text>
+  <text x="258" y="635" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+feedback: Markdown</text>
+  <text x="258" y="650" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+approved: Boolean</text>
+
+  <line x1="490" y1="607" x2="420" y2="607" stroke="#64748b" stroke-width="1.5"/>
+  <text x="475" y="602" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">1</text>
+  <text x="430" y="602" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">1</text>
+
+  <!-- Class 12: PortfolioItem -->
+  <rect x="30" y="550" width="160" height="115" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+  <rect x="30" y="550" width="160" height="24" rx="4" fill="#059669"/>
+  <text x="110" y="567" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">PortfolioItem</text>
+  <text x="38" y="590" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+id: String</text>
+  <text x="38" y="605" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+userId: String</text>
+  <text x="38" y="620" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+simulationId: String</text>
+  <text x="38" y="635" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+dossier: JSON</text>
+  <text x="38" y="650" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">+isPublic: Boolean</text>
+
+  <line x1="250" y1="607" x2="190" y2="607" stroke="#64748b" stroke-width="1.5"/>
+  <text x="205" y="602" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">1</text>
+  <text x="238" y="602" font-family="Arial, sans-serif" font-size="9.5" font-weight="bold" fill="#475569" text-anchor="start">*</text>
+
+  <!-- Footer Note -->
+  <rect x="30" y="695" width="820" height="55" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="45" y="718" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a">Model Schema Consistency:</text>
+  <text x="45" y="736" font-family="Arial, sans-serif" font-size="9.5" fill="#475569">Strictly reflects the 21 models defined in prisma/schema.prisma including User, Profession, Role, Company, Simulation, Task, Workspace, Submission, Evaluation, and PortfolioItem.</text>
+</svg>

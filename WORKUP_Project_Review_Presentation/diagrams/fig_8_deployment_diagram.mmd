@@ -1,0 +1,25 @@
+flowchart TD
+    subgraph Client["Client Workstation"]
+        Browser["Modern Web Browser (Chrome, Firefox, Safari, Edge)"]
+    end
+
+    subgraph Server["Next.js Application Server (Node.js 18+ / 20+)"]
+        Web["Next.js 14 App Router Web Server"]
+        API["API Gateway & Route Handlers"]
+        Auth["Security & JWT Auth Controller"]
+    end
+
+    subgraph Sandbox["Sandbox Execution Host (Local / Worker Host)"]
+        Orch["Workspace Orchestrator Daemon"]
+        Pool["Isolated Process Sandbox Pool"]
+        Harness["Test Harness (Vitest / pytest)"]
+    end
+
+    subgraph DB["Data Persistence Host"]
+        SQL["Relational Database (SQLite dev.db / PostgreSQL)"]
+        Files["Persistent File Volume (.artifacts/)"]
+    end
+
+    Browser -- "HTTPS / WSS (Port 443 / 3000)" --> Server
+    Server -- "Process Spawning / Local IPC" --> Sandbox
+    Server -- "Prisma Query Engine (SQL)" --> DB

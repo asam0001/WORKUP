@@ -1,0 +1,29 @@
+sequenceDiagram
+    autonumber
+    actor Student as Student Learner
+    participant UI as Workbench UI
+    participant API as API Route Handler
+    participant Orch as Workspace Orchestrator
+    participant Sandbox as Sandbox Process
+    participant DB as Prisma / SQLite DB
+    participant Eval as AI Tech Lead Reviewer
+
+    Student->>UI: 1: Click "Run Automated Tests"
+    UI->>API: 2: POST /api/workspaces/[id]/test
+    API->>Orch: 3: executeTestCommand(wsId)
+    Orch->>Sandbox: 4: spawnProcess("npm test", timeout=4000ms)
+    Sandbox-->>Orch: 5: stdout: "5 passing", exitCode: 0
+    Orch-->>API: 6: TestSummary: { passed: 5, failed: 0 }
+    API-->>UI: 7: 200 OK (Render green test badges)
+
+    Student->>UI: 8: Click "Submit Pull Request"
+    UI->>API: 9: POST /api/workspaces/[id]/submit
+    API->>Orch: 10: createSubmissionSnapshot(wsId)
+    Orch->>Sandbox: 11: captureGitDiff() & Commit SHA
+    Sandbox-->>Orch: 12: Unified Diff & Commit SHA 7f2a89
+    Orch->>DB: 13: INSERT into Submission (status='SUBMITTED')
+    API->>Eval: 14: triggerEvaluation(submissionId, diff, rubric)
+    Eval->>DB: 15: INSERT Evaluation (Score: 95, Approved: true)
+    Eval->>DB: 16: UPDATE Task DAG (Unlock dependent nodes)
+    API-->>UI: 17: 200 OK (Evaluation & Line-by-Line Critique)
+    UI-->>Student: 18: Display PR Approval & Next Task Unlocked

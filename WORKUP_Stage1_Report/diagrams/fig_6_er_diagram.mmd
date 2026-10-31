@@ -1,0 +1,16 @@
+erDiagram
+    USER ||--o| PROFILE : "has"
+    USER ||--o{ WORKSPACE : "provisions"
+    USER ||--o{ SUBMISSION : "creates"
+    USER ||--o{ PORTFOLIO_ITEM : "owns"
+
+    PROFESSION ||--o{ ROLE : "defines"
+    ROLE ||--o{ ROLE_SKILL : "maps"
+    SKILL ||--o{ ROLE_SKILL : "referenced_by"
+
+    COMPANY ||--o{ SIMULATION : "sponsors"
+    ROLE ||--o{ SIMULATION : "targeted_by"
+    SIMULATION ||--o{ TASK : "contains"
+    TASK ||--o{ SUBMISSION : "receives"
+    SUBMISSION ||--o| EVALUATION : "assessed_by"
+    SIMULATION ||--o{ PORTFOLIO_ITEM : "produces"

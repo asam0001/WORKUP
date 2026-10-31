@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" width="900" height="720">
+  <rect width="900" height="720" fill="#f8fafc" rx="8"/>
+
+  <!-- Presentation Layer -->
+  <rect x="25" y="25" width="850" height="110" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="45" y="48" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1e3a8a">PRESENTATION LAYER (Next.js 14 App Router &amp; Tailwind CSS)</text>
+
+  <rect x="45" y="60" width="150" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="120" y="85" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Navigation &amp; Auth</text>
+  <text x="120" y="100" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">navbar.tsx, role-badge</text>
+
+  <rect x="210" y="60" width="150" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="285" y="85" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Career Explorer</text>
+  <text x="285" y="100" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">profession-card.tsx</text>
+
+  <rect x="375" y="60" width="150" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="450" y="85" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Simulation Backlog</text>
+  <text x="450" y="100" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">simulation-card.tsx</text>
+
+  <rect x="540" y="60" width="165" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="622" y="85" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Cloud Workbench UI</text>
+  <text x="622" y="100" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">workspaces/[id]/page.tsx</text>
+
+  <rect x="720" y="60" width="140" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="790" y="85" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Admin Studio</text>
+  <text x="790" y="100" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">admin/page.tsx</text>
+
+  <line x1="450" y1="135" x2="450" y2="162" stroke="#2563eb" stroke-width="1.8"/>
+  <polygon points="445,159 450,166 455,159" fill="#2563eb"/>
+
+  <!-- API Layer -->
+  <rect x="25" y="168" width="850" height="110" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="45" y="191" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#14532d">API ROUTE HANDLERS (Typed Controllers with Zod)</text>
+
+  <rect x="45" y="203" width="150" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="120" y="228" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Auth Routes</text>
+  <text x="120" y="243" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">/api/auth/*</text>
+
+  <rect x="210" y="203" width="150" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="285" y="228" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Simulations Routes</text>
+  <text x="285" y="243" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">/api/simulations/*</text>
+
+  <rect x="375" y="203" width="150" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="450" y="228" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Workspace Routes</text>
+  <text x="450" y="243" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">/api/workspaces/*</text>
+
+  <rect x="540" y="203" width="165" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="622" y="228" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Profile &amp; Dossier</text>
+  <text x="622" y="243" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">/api/profile/*</text>
+
+  <rect x="720" y="203" width="140" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="790" y="228" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Admin Audit Routes</text>
+  <text x="790" y="243" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">/api/admin/*</text>
+
+  <line x1="450" y1="278" x2="450" y2="305" stroke="#2563eb" stroke-width="1.8"/>
+  <polygon points="445,302 450,309 455,302" fill="#2563eb"/>
+
+  <!-- Core Services Layer -->
+  <rect x="25" y="311" width="850" height="110" rx="6" fill="#fdf4ff" stroke="#f0abfc" stroke-width="1.5"/>
+  <text x="45" y="334" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#701a75">CORE BUSINESS LIBRARIES (src/lib)</text>
+
+  <rect x="45" y="346" width="150" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="120" y="371" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Auth Service</text>
+  <text x="120" y="386" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">auth.ts, rbac.ts</text>
+
+  <rect x="210" y="346" width="150" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="285" y="371" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Task Validator</text>
+  <text x="285" y="386" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">task-validator.ts</text>
+
+  <rect x="375" y="346" width="150" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="450" y="371" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Workspace Orch.</text>
+  <text x="450" y="386" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">orchestrator.ts</text>
+
+  <rect x="540" y="346" width="165" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="622" y="371" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">API Envelopes</text>
+  <text x="622" y="386" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">api-response.ts</text>
+
+  <rect x="720" y="346" width="140" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="790" y="371" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Structured Logger</text>
+  <text x="790" y="386" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">logger.ts, env.ts</text>
+
+  <line x1="260" y1="421" x2="260" y2="455" stroke="#2563eb" stroke-width="1.8"/>
+  <polygon points="255,452 260,459 265,452" fill="#2563eb"/>
+
+  <line x1="640" y1="421" x2="640" y2="455" stroke="#2563eb" stroke-width="1.8"/>
+  <polygon points="635,452 640,459 645,452" fill="#2563eb"/>
+
+  <!-- Execution Engine (Left Bottom) -->
+  <rect x="25" y="460" width="410" height="150" rx="6" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="45" y="483" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#78350f">SANDBOX EXECUTION ENGINE</text>
+
+  <rect x="45" y="498" width="175" height="48" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="132" y="520" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Sandbox Provider</text>
+  <text x="132" y="534" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">sandbox-provider.ts</text>
+
+  <rect x="235" y="498" width="180" height="48" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="325" y="520" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Process Spawner</text>
+  <text x="325" y="534" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Timeout &amp; process jailing</text>
+
+  <rect x="45" y="552" width="175" height="48" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="132" y="574" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Test Harness</text>
+  <text x="132" y="588" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Vitest CLI executor</text>
+
+  <rect x="235" y="552" width="180" height="48" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="325" y="574" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Diff &amp; Snapshot</text>
+  <text x="325" y="588" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Git unified diff generator</text>
+
+  <!-- Storage (Right Bottom) -->
+  <rect x="455" y="460" width="420" height="150" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="475" y="483" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">PERSISTENCE &amp; STORAGE</text>
+
+  <rect x="475" y="498" width="185" height="48" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="567" y="520" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Prisma Client</text>
+  <text x="567" y="534" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">prisma.ts (Singleton)</text>
+
+  <rect x="675" y="498" width="185" height="48" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="767" y="520" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Relational Storage</text>
+  <text x="767" y="534" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">SQLite dev.db (21 tables)</text>
+
+  <rect x="475" y="552" width="185" height="48" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="567" y="574" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Workspace Directory</text>
+  <text x="567" y="588" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">.workspaces/&lt;workspaceId&gt;</text>
+
+  <rect x="675" y="552" width="185" height="48" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="767" y="574" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Artifact Storage</text>
+  <text x="767" y="588" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">.artifacts/ (Snapshots &amp; PRs)</text>
+</svg>

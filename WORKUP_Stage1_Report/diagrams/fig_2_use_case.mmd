@@ -1,0 +1,47 @@
+flowchart LR
+    Student(["Student / Learner"])
+    Author(["Content Author"])
+    Reviewer(["Technical Reviewer"])
+    Admin(["System Administrator"])
+
+    subgraph Boundary["WORKUP Platform Boundary"]
+        UC1["UC-01: Explore Careers & Roles"]
+        UC2["UC-02: Launch Simulation Track"]
+        UC3["UC-03: Inspect Ticket & ADR"]
+        UC4["UC-04: Provision Cloud Workspace"]
+        UC5["UC-05: Run In-Sandbox Tests"]
+        UC6["UC-06: Submit Pull Request"]
+        UC7["UC-07: View Evidence Dossier"]
+
+        UC8["UC-08: Inspect PR Diff & Notes"]
+        UC9["UC-09: Score Rubric Criteria"]
+        UC10["UC-10: Line-by-Line Code Review"]
+
+        UC11["UC-11: Author Company & Teams"]
+        UC12["UC-12: Configure Task DAG"]
+        UC13["UC-13: Set Acceptance Benchmarks"]
+
+        UC14["UC-14: Audit Log Governance"]
+        UC15["UC-15: Fleet Concurrency Limits"]
+        UC16["UC-16: User Role Management"]
+    end
+
+    Student --> UC1
+    Student --> UC2
+    Student --> UC3
+    Student --> UC4
+    Student --> UC5
+    Student --> UC6
+    Student --> UC7
+
+    Reviewer --> UC8
+    Reviewer --> UC9
+    Reviewer --> UC10
+
+    Author --> UC11
+    Author --> UC12
+    Author --> UC13
+
+    Admin --> UC14
+    Admin --> UC15
+    Admin --> UC16

@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" width="900" height="760">
+  <rect width="900" height="760" fill="#f8fafc" rx="8"/>
+
+  <!-- Table 1: USER -->
+  <rect x="30" y="30" width="170" height="120" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="30" y="30" width="170" height="22" rx="4" fill="#1e293b"/>
+  <text x="115" y="45" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">USER</text>
+  <text x="38" y="68" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="38" y="83" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   email: String (UQ)</text>
+  <text x="38" y="98" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   passwordHash: String</text>
+  <text x="38" y="113" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   role: RoleEnum</text>
+  <text x="38" y="128" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   status: String</text>
+
+  <!-- Table 2: PROFILE -->
+  <rect x="30" y="190" width="170" height="95" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="30" y="190" width="170" height="22" rx="4" fill="#1e293b"/>
+  <text x="115" y="205" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">PROFILE</text>
+  <text x="38" y="228" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="38" y="243" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">userId: String (UQ)</tspan></text>
+  <text x="38" y="258" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   headline: String</text>
+  <text x="38" y="273" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   experienceLevel: String</text>
+
+  <line x1="115" y1="150" x2="115" y2="190" stroke="#64748b" stroke-width="1.5"/>
+  <text x="122" y="172" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#475569" text-anchor="start">1:1</text>
+
+  <!-- Table 3: PROFESSION -->
+  <rect x="250" y="30" width="175" height="105" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="250" y="30" width="175" height="22" rx="4" fill="#1e293b"/>
+  <text x="337" y="45" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">PROFESSION</text>
+  <text x="258" y="68" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="258" y="83" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">careerFamilyId: String</tspan></text>
+  <text x="258" y="98" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   slug: String (UQ)</text>
+  <text x="258" y="113" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   name: String</text>
+  <text x="258" y="128" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   status: String</text>
+
+  <!-- Table 4: ROLE -->
+  <rect x="250" y="180" width="175" height="110" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="250" y="180" width="175" height="22" rx="4" fill="#1e293b"/>
+  <text x="337" y="195" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">ROLE</text>
+  <text x="258" y="218" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="258" y="233" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">professionId: String</tspan></text>
+  <text x="258" y="248" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   slug: String (UQ)</text>
+  <text x="258" y="263" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   title: String</text>
+  <text x="258" y="278" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   level: String</text>
+
+  <line x1="337" y1="135" x2="337" y2="180" stroke="#64748b" stroke-width="1.5"/>
+  <text x="343" y="160" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#475569" text-anchor="start">1:N</text>
+
+  <!-- Table 5: SKILL -->
+  <rect x="250" y="335" width="175" height="95" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="250" y="335" width="175" height="22" rx="4" fill="#1e293b"/>
+  <text x="337" y="350" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">SKILL</text>
+  <text x="258" y="373" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="258" y="388" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   name: String</text>
+  <text x="258" y="403" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   slug: String (UQ)</text>
+  <text x="258" y="418" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   category: String</text>
+
+  <!-- Table 6: COMPANY -->
+  <rect x="475" y="30" width="175" height="110" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="475" y="30" width="175" height="22" rx="4" fill="#1e293b"/>
+  <text x="562" y="45" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">COMPANY</text>
+  <text x="483" y="68" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="483" y="83" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   name: String</text>
+  <text x="483" y="98" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   slug: String (UQ)</text>
+  <text x="483" y="113" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   industry: String</text>
+  <text x="483" y="128" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   techStack: String</text>
+
+  <!-- Table 7: SIMULATION -->
+  <rect x="475" y="180" width="175" height="120" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="475" y="180" width="175" height="22" rx="4" fill="#1e293b"/>
+  <text x="562" y="195" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">SIMULATION</text>
+  <text x="483" y="218" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="483" y="233" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">companyId: String</tspan></text>
+  <text x="483" y="248" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">roleId: String</tspan></text>
+  <text x="483" y="263" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   title: String</text>
+  <text x="483" y="278" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   difficulty: String</text>
+
+  <line x1="562" y1="140" x2="562" y2="180" stroke="#64748b" stroke-width="1.5"/>
+  <text x="568" y="160" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#475569" text-anchor="start">1:N</text>
+
+  <line x1="425" y1="235" x2="475" y2="235" stroke="#64748b" stroke-width="1.5"/>
+  <text x="440" y="230" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#475569" text-anchor="start">1:N</text>
+
+  <!-- Table 8: TASK -->
+  <rect x="475" y="345" width="175" height="130" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="475" y="345" width="175" height="22" rx="4" fill="#1e293b"/>
+  <text x="562" y="360" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">TASK</text>
+  <text x="483" y="383" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="483" y="398" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">phaseId: String</tspan></text>
+  <text x="483" y="413" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   ticketKey: String (UQ)</text>
+  <text x="483" y="428" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   type: String</text>
+  <text x="483" y="443" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   automatedTests: JSON</text>
+  <text x="483" y="458" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   rubric: JSON</text>
+
+  <line x1="562" y1="300" x2="562" y2="345" stroke="#64748b" stroke-width="1.5"/>
+  <text x="568" y="322" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#475569" text-anchor="start">1:N</text>
+
+  <!-- Table 9: WORKSPACE -->
+  <rect x="30" y="345" width="170" height="130" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="30" y="345" width="170" height="22" rx="4" fill="#1e293b"/>
+  <text x="115" y="360" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">WORKSPACE</text>
+  <text x="38" y="383" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="38" y="398" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">userId: String</tspan></text>
+  <text x="38" y="413" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">simulationId: String</tspan></text>
+  <text x="38" y="428" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   status: String</text>
+  <text x="38" y="443" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   cpuLimit: Float</text>
+  <text x="38" y="458" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   memoryLimitMb: Int</text>
+
+  <path d="M 115 150 L 115 345" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  <text x="122" y="315" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#475569" text-anchor="start">1:N</text>
+
+  <!-- Table 10: SUBMISSION -->
+  <rect x="475" y="525" width="175" height="115" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="475" y="525" width="175" height="22" rx="4" fill="#1e293b"/>
+  <text x="562" y="540" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">SUBMISSION</text>
+  <text x="483" y="563" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="483" y="578" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">taskId: String</tspan></text>
+  <text x="483" y="593" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">userId: String</tspan></text>
+  <text x="483" y="608" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   commitSha: String</text>
+  <text x="483" y="623" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   status: String</text>
+
+  <line x1="562" y1="475" x2="562" y2="525" stroke="#64748b" stroke-width="1.5"/>
+  <text x="568" y="500" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#475569" text-anchor="start">1:N</text>
+
+  <!-- Table 11: EVALUATION -->
+  <rect x="690" y="525" width="175" height="115" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="690" y="525" width="175" height="22" rx="4" fill="#1e293b"/>
+  <text x="777" y="540" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">EVALUATION</text>
+  <text x="698" y="563" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="698" y="578" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">submissionId: String</tspan></text>
+  <text x="698" y="593" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   score: Int (0-100)</text>
+  <text x="698" y="608" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   rubricScores: JSON</text>
+  <text x="698" y="623" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   approved: Boolean</text>
+
+  <line x1="650" y1="582" x2="690" y2="582" stroke="#64748b" stroke-width="1.5"/>
+  <text x="662" y="577" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#475569" text-anchor="start">1:1</text>
+
+  <!-- Table 12: PORTFOLIO_ITEM -->
+  <rect x="250" y="525" width="175" height="115" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="1.2"/>
+  <rect x="250" y="525" width="175" height="22" rx="4" fill="#1e293b"/>
+  <text x="337" y="540" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">PORTFOLIO_ITEM</text>
+  <text x="258" y="563" font-family="Courier, monospace" font-size="9.5" fill="#b91c1c" font-weight="bold" text-anchor="start">PK <tspan fill="#1e293b" font-weight="normal">id: String</tspan></text>
+  <text x="258" y="578" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">userId: String</tspan></text>
+  <text x="258" y="593" font-family="Courier, monospace" font-size="9.5" fill="#0369a1" font-weight="bold" text-anchor="start">FK <tspan fill="#1e293b" font-weight="normal">simulationId: String</tspan></text>
+  <text x="258" y="608" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   title: String</text>
+  <text x="258" y="623" font-family="Courier, monospace" font-size="9.5" fill="#1e293b" text-anchor="start">   dossier: JSON</text>
+
+  <line x1="475" y1="582" x2="425" y2="582" stroke="#64748b" stroke-width="1.5"/>
+  <text x="442" y="577" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#475569" text-anchor="start">1:1</text>
+</svg>

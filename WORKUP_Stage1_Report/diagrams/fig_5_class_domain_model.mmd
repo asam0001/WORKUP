@@ -1,0 +1,86 @@
+classDiagram
+    class User {
+        +String id
+        +String email
+        +String passwordHash
+        +String role
+        +String status
+        +hasPermission()
+    }
+    class Profile {
+        +String id
+        +String userId
+        +String headline
+        +String experienceLevel
+    }
+    class Profession {
+        +String id
+        +String slug
+        +String name
+        +String category
+    }
+    class Role {
+        +String id
+        +String professionId
+        +String title
+        +String level
+    }
+    class Skill {
+        +String id
+        +String name
+        +String slug
+        +String category
+    }
+    class Company {
+        +String id
+        +String name
+        +String slug
+        +String industry
+    }
+    class Simulation {
+        +String id
+        +String companyId
+        +String title
+        +String difficulty
+    }
+    class Task {
+        +String id
+        +String ticketKey
+        +String title
+        +String type
+    }
+    class Workspace {
+        +String id
+        +String userId
+        +String status
+        +Float cpuLimit
+    }
+    class Submission {
+        +String id
+        +String taskId
+        +String commitSha
+        +String status
+    }
+    class Evaluation {
+        +String id
+        +Int score
+        +String feedback
+        +Boolean approved
+    }
+    class PortfolioItem {
+        +String id
+        +String userId
+        +String dossier
+    }
+
+    User --> Profile : has
+    User --> Workspace : provisions
+    User --> Submission : authors
+    User --> PortfolioItem : owns
+    Profession --> Role : defines
+    Role --> Skill : requires
+    Company --> Simulation : sponsors
+    Simulation --> Task : contains
+    Task --> Workspace : contextualizes
+    Task --> Submission : receives
+    Submission --> Evaluation : receives

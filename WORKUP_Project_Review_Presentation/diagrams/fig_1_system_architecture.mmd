@@ -1,0 +1,42 @@
+flowchart TD
+    subgraph Tier1["1. CLIENT PRESENTATION TIER (Next.js 14 App Router, React 18, Tailwind CSS)"]
+        UI1["Landing Page & Career Explorer"]
+        UI2["Student Workstation & Dashboard"]
+        UI3["Interactive Cloud Workbench"]
+        UI4["Verifiable Evidence Dossier"]
+    end
+
+    subgraph Tier2["2. API GATEWAY & SECURITY TIER (Next.js Route Handlers, Zod Validation)"]
+        API1["Auth & Session API (bcryptjs, jose)"]
+        API2["RBAC Guard API (4 Roles)"]
+        API3["Simulations & DAG Content API"]
+        API4["Workspace Lifecycle API"]
+        API5["Submission & Evaluation API"]
+    end
+
+    subgraph Tier3["3. CORE DOMAIN & APPLICATION SERVICES TIER"]
+        SVC1["Simulation Content Engine & DAG Engine"]
+        SVC2["Workspace Orchestrator (Concurrency & Timeouts)"]
+        SVC3["Multi-Tier Evaluation & Rubric Engine"]
+        SVC4["AI Tech Lead PR Review Agent"]
+    end
+
+    subgraph Tier4["4. WORKSPACE & EXECUTION TIER"]
+        EX1["Isolated Sandbox Provider (Directory Jailing)"]
+        EX2["Container Workspaces (.workspaces/<id>)"]
+        EX3["Test Runner Harness (Vitest / pytest)"]
+        EX4["Git VCS (Branches, Diffs, Commit SHAs)"]
+    end
+
+    subgraph Tier5["5. PERSISTENCE & STORAGE TIER"]
+        DB1["Prisma ORM 5.x Client (Type-Safe)"]
+        DB2["Relational Database (SQLite dev.db / PostgreSQL)"]
+        DB3["Snapshot & Diff Store (.artifacts/)"]
+        DB4["Immutable Audit Event Store"]
+    end
+
+    Tier1 --> Tier2
+    Tier2 --> Tier3
+    Tier3 --> Tier4
+    Tier3 --> Tier5
+    Tier4 --> Tier5

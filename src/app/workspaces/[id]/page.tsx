@@ -247,7 +247,11 @@ export default function WorkspaceWorkbenchPage() {
         throw new Error(data.error?.message || "Failed to submit work");
       }
       setIsSubmitModalOpen(false);
-      router.push(`/dashboard?submitted=true`);
+      if (data.data?.submission?.id) {
+        router.push(`/submissions/${data.data.submission.id}`);
+      } else {
+        router.push(`/dashboard?submitted=true`);
+      }
     } catch (err: any) {
       alert(`Submission error: ${err.message}`);
     } finally {

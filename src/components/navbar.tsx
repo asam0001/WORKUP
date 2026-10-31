@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Terminal, User, LogOut, LayoutDashboard, Compass, Shield } from "lucide-react";
+import { Terminal, User, LogOut, LayoutDashboard, Compass, Shield, Award } from "lucide-react";
 import { RoleBadge } from "./role-badge";
 
 interface CurrentUser {
@@ -71,13 +71,22 @@ export function Navbar() {
                 <span>Professions & Tracks</span>
               </Link>
               {user && (
-                <Link
-                  href="/dashboard"
-                  className="flex items-center space-x-1.5 hover:text-blue-600 transition"
-                >
-                  <LayoutDashboard className="w-4 h-4" />
-                  <span>My Workstation</span>
-                </Link>
+                <>
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center space-x-1.5 hover:text-blue-600 transition"
+                  >
+                    <LayoutDashboard className="w-4 h-4" />
+                    <span>My Workstation</span>
+                  </Link>
+                  <Link
+                    href="/portfolio"
+                    className="flex items-center space-x-1.5 hover:text-blue-600 transition"
+                  >
+                    <Award className="w-4 h-4" />
+                    <span>Verified Portfolio</span>
+                  </Link>
+                </>
               )}
               {user?.role === "administrator" && (
                 <Link

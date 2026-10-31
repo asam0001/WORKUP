@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { getWorkspaceProvider } from "./providers";
+import { evaluationEngine } from "@/lib/evaluation/evaluator";
 import {
   WorkspaceConnectionInfo,
   WorkspaceLimits,
@@ -388,15 +389,24 @@ export class WorkspaceOrchestrator {
         commitSha: snapshot.commitSha,
         status: "SUBMITTED",
         studentNotes: submissionData.studentNotes || "",
-        diffSummary: `Preserved ${artifacts.length} deliverable artifacts.`,
+        diffSummary: JSON.stringify(artifacts),
       },
     });
 
-    // 4. Terminate workspace gracefully
+    // 4. Trigger Automated AI Tech Lead Evaluation
+    let evaluation = null;
+    try {
+      evaluation = await evaluationEngine.evaluateSubmission(submission.id, undefined, artifacts);
+    } catch (evalErr) {
+      console.error("Evaluation error during submitWork:", evalErr);
+    }
+
+    // 5. Terminate workspace gracefully
     await this.destroyWorkspace(workspaceId, userId, "SUBMISSION_COMPLETE");
 
     return {
       submission,
+      evaluation,
       artifacts,
     };
   }

@@ -23,8 +23,9 @@ export async function POST(
     const result = await workspaceOrchestrator.submitWork(id, session.userId, validated);
 
     return apiSuccess({
-      message: "Work successfully submitted, deliverables preserved, and workspace decommissioned.",
+      message: "Work successfully submitted, deliverables preserved, and evaluated by Tech Lead.",
       submission: result.submission,
+      evaluation: result.evaluation,
       artifactsCount: result.artifacts.length,
     });
   } catch (err) {

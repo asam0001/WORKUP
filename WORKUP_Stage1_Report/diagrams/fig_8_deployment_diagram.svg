@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 720" width="880" height="720">
+  <rect width="880" height="720" fill="#f8fafc" rx="8"/>
+
+  <!-- Client Node -->
+  <rect x="25" y="25" width="830" height="100" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="45" y="50" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">«device» Client Workstation</text>
+
+  <rect x="45" y="62" width="790" height="48" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="440" y="84" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Modern Web Browser (Chrome 120+, Firefox 120+, Safari 17+, Edge)</text>
+  <text x="440" y="99" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Renders Next.js React 18 UI, Monaco/Code Editor, Terminal Stream, and Verified Portfolio</text>
+
+  <!-- Connect 1 -> 2 -->
+  <line x1="440" y1="125" x2="440" y2="170" stroke="#3b82f6" stroke-width="1.8"/>
+  <polygon points="435,167 440,174 445,167" fill="#3b82f6"/>
+  <text x="450" y="152" font-family="Courier, monospace" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="start">HTTPS / WSS (Port 443 / 3000)</text>
+
+  <!-- Server Node -->
+  <rect x="25" y="174" width="830" height="150" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="45" y="199" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">«execution environment» Next.js Application Server (Node.js 18+ / 20+)</text>
+
+  <rect x="45" y="212" width="250" height="95" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="170" y="239" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Next.js 14 Web Server</text>
+  <text x="170" y="256" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">App Router, SSR Pages,</text>
+  <text x="170" y="272" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Static Asset Pipeline,</text>
+  <text x="170" y="288" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Tailwind CSS Compiler</text>
+
+  <rect x="315" y="212" width="250" height="95" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="440" y="239" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">API Gateway &amp; Handlers</text>
+  <text x="440" y="256" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">RESTful API Endpoints,</text>
+  <text x="440" y="272" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Zod Request Validation,</text>
+  <text x="440" y="288" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Typed JSON Envelopes</text>
+
+  <rect x="585" y="212" width="250" height="95" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="710" y="239" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Security &amp; Auth Controller</text>
+  <text x="710" y="256" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">bcryptjs Password Hashing,</text>
+  <text x="710" y="272" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Signed JWT (jose) Sessions,</text>
+  <text x="710" y="288" font-family="Arial, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">HTTP-only Secure Cookies</text>
+
+  <!-- Connect to Execution & DB -->
+  <line x1="240" y1="324" x2="240" y2="380" stroke="#3b82f6" stroke-width="1.8"/>
+  <polygon points="235,377 240,384 245,377" fill="#3b82f6"/>
+  <text x="250" y="356" font-family="Courier, monospace" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="start">Process Spawning / Local IPC</text>
+
+  <line x1="640" y1="324" x2="640" y2="380" stroke="#3b82f6" stroke-width="1.8"/>
+  <polygon points="635,377 640,384 645,377" fill="#3b82f6"/>
+  <text x="650" y="356" font-family="Courier, monospace" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="start">Prisma Query Engine (SQL)</text>
+
+  <!-- Execution Node (Left) -->
+  <rect x="25" y="384" width="400" height="235" rx="8" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="45" y="409" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">«execution environment» Sandbox Runner</text>
+
+  <rect x="45" y="424" width="360" height="55" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="225" y="447" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Workspace Orchestrator Daemon</text>
+  <text x="225" y="462" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Enforces max 2 workspaces/student, 30m idle timeout</text>
+
+  <rect x="45" y="489" width="360" height="55" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="225" y="512" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Isolated Process Sandbox Pool</text>
+  <text x="225" y="527" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Jailed in .workspaces/&lt;wsId&gt;, CPU/RAM thresholds</text>
+
+  <rect x="45" y="554" width="360" height="50" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="225" y="577" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Test Harness (Vitest / pytest)</text>
+  <text x="225" y="591" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Isolated runner with hard 4000ms timeout cap</text>
+
+  <!-- DB Node (Right) -->
+  <rect x="455" y="384" width="400" height="235" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="475" y="409" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">«database system» Data Persistence</text>
+
+  <rect x="475" y="424" width="360" height="85" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="655" y="449" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Relational Database Engine</text>
+  <text x="655" y="466" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">SQLite (dev.db for zero-dependency execution)</text>
+  <text x="655" y="482" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">PostgreSQL (AWS RDS target for production scaling)</text>
+  <text x="655" y="498" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">21 Domain Entity Tables with Foreign Key Cascades</text>
+
+  <rect x="475" y="519" width="360" height="85" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="655" y="544" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Local Persistent File Storage</text>
+  <text x="655" y="561" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">.artifacts/ (Saved snapshots, PR diffs, review logs)</text>
+  <text x="655" y="577" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Immutable Audit Trail Event Logs</text>
+  <text x="655" y="593" font-family="Arial, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Git Repositories and Branch Storage</text>
+
+  <!-- Note Footer -->
+  <rect x="25" y="635" width="830" height="65" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="45" y="658" font-family="Arial, sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a">Deployment Scope (Stage-I vs Stage-II):</text>
+  <text x="45" y="677" font-family="Arial, sans-serif" font-size="9.5" fill="#475569">Stage-I implements the complete verified single-host deployment (Next.js, SQLite, IsolatedSandboxProvider). Stage-II targets multi-tenant Kubernetes container fleets and managed PostgreSQL.</text>
+</svg>

@@ -1,0 +1,19 @@
+flowchart TD
+    Start([Learner Enters WORKUP]) --> Explore[Explore Career Families & Roles]
+    Explore --> SelectSim[Select Simulated Company & Track]
+    SelectSim --> CheckPrereq{Prerequisites Met?}
+    CheckPrereq -- No --> LockTask[Task Locked in DAG]
+    LockTask --> SelectSim
+    CheckPrereq -- Yes --> LaunchWS[Provision Isolated Cloud Workspace]
+    LaunchWS --> ReadTicket[Inspect Ticket, Legacy Code & ADR]
+    ReadTicket --> ImplementCode[Implement Solution in Sandbox]
+    ImplementCode --> RunLocalTests[Execute Vitest / Automated Test Suite]
+    RunLocalTests --> TestsPass{Tests Pass?}
+    TestsPass -- No --> InspectFailures[Analyze Error Traces & Refactor]
+    InspectFailures --> ImplementCode
+    TestsPass -- Yes --> CreatePR[Submit Git Pull Request & Commit]
+    CreatePR --> PRApproved{PR Approved?}
+    PRApproved -- Changes Requested --> ReviewComments[Review Feedback & Refactor]
+    ReviewComments --> ImplementCode
+    PRApproved -- Approved --> UnlockNext[Unlock Dependent Tasks & Update Dossier]
+    UnlockNext --> End([Published to Developer Portfolio])

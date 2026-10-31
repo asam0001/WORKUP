@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { canAccessAdmin } from "@/lib/rbac";
 import { prisma } from "@/lib/prisma";
-import { Shield, Users, Briefcase, FileText, Activity, AlertTriangle, Clock, Layers } from "lucide-react";
+import { Shield, Users, Briefcase, FileText, Activity, AlertTriangle, Clock, Layers, FileCheck } from "lucide-react";
 import { RoleBadge } from "@/components/role-badge";
 import { formatDate, formatTimeAgo } from "@/lib/utils";
 
@@ -86,7 +86,14 @@ export default async function AdminPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center flex-wrap gap-3">
+          <Link
+            href="/admin/submissions"
+            className="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xs transition"
+          >
+            <FileCheck className="w-4 h-4" />
+            <span>Submissions & Reviews</span>
+          </Link>
           <Link
             href="/admin/workspaces"
             className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xs transition"
