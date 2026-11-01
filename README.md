@@ -1,92 +1,141 @@
 # [workup] — Virtual Professional Experience Platform
 
-> **Experience how engineers actually work inside companies.**  
-> Built on the production foundation approved during Phase 0:  
+> **Experience how engineers actually work inside tech companies.**  
 > `Career → Role → Company → Business Problem → Professional Task → Real Tools → Cloud Workspace → Implementation → Testing → Review → Deployment → Monitoring → Debugging → Evidence of Skill`
 
 ---
 
-## 1. System Overview
+## 1. What is [workup]?
 
-**[workup]** is a production-grade Virtual Professional Experience Platform designed to bridge academic theory and practical corporate engineering.
+**[workup]** is a Virtual Professional Experience Platform designed to bridge academic education and real corporate software engineering.
 
-The platform is NOT:
-* An online course platform with passive video lectures.
-* A coding challenge website testing isolated single-file algorithms.
-* A generic AI tutor answering questions out of context.
-* A certificate mill generating unverifiable PDF badges.
-* A fake virtual office with 2D avatars.
+The platform is **NOT**:
+* ❌ An online course with passive video lectures.
+* ❌ A coding challenge website testing isolated, synthetic algorithms.
+* ❌ A generic AI chatbot hallucinating answers out of context.
+* ❌ A certificate mill generating unverifiable PDF badges.
+* ❌ A superficial 2D virtual office game.
 
-Instead, learners step into the shoes of practicing engineers inside simulated tech companies. They receive business problem tickets, open containerized cloud workspaces, inspect legacy codebases with technical debt and Architecture Decision Records (ADRs), write code according to corporate style guides, pass unit/integration tests, endure rigorous line-level pull request reviews from an **AI Tech Lead**, trigger staging deployments, observe synthetic production telemetry in Grafana, hotfix live production alerts, and graduate with an immutable, cryptographically verifiable **Evidence of Skill Dossier** backed by real Git commits.
+### The Core Differentiator
+A person who has **never worked in a software company** can open WORKUP, be welcomed by their simulated team lead, understand their first assignment in plain English, complete it with assistance from an **AI technical colleague (Quila)**, run automated tests, and see the verified evidence of what they achieved.
 
 ---
 
-## 2. Technology Stack
+## 2. Key Capabilities & Features
+
+### 🎯 1. Mission Guidance System
+Every mission provides complete business context rather than a dry coding prompt:
+* **Workplace Context**: Ticket key (e.g. `FF-001`), Department (`Backend Engineering`), Company (`FinFlow Technologies`), Difficulty (`Beginner`), and Team Lead (`Alex Rivera, Senior Backend Lead`).
+* **The Scenario**: Explains the customer-facing problem in simple, accessible language.
+* **Why This Matters**: Connects technical tasks to business impact (e.g., stopping ghost user sessions and preventing database corruption).
+* **Target Files with 1-Click Open**: Direct links to open target source files (e.g., `src/auth/validator.py`) straight into the editor.
+* **Step-by-Step Checklist**: Checkable progress indicators guiding the student through investigation, modification, testing, and submission.
+* **Measurable Expected Outcome**: Explicit definition of what success looks like.
+* **Progressive Hints**: Layered hints locked by default and revealed sequentially (direction $\rightarrow$ logic $\rightarrow$ syntax) so learners solve problems independently.
+
+### 🤖 2. AI Helpdesk — Virtual Team Assistant (Quila)
+A persistent floating technical mentor accessible throughout the workspace:
+* **Helpful Colleague Persona**: Behaves like an empathetic senior teammate sitting next to the learner, not a generic chatbot.
+* **Capabilities**:
+  * **Mission Explanation**: Explains what the ticket requires in beginner-friendly language without technical jargon.
+  * **Step Guidance**: Explains what to do next based on whether tests are currently passing or failing.
+  * **Progressive Hints**: Gives subtle clues before revealing code solutions.
+  * **Error Troubleshooting**: Translates test assertion errors and stack traces into plain English.
+  * **Submission Help**: Guides students on how to save, test, and submit work for Tech Lead review.
+* **Quick-Action Chips**: Instant prompts like *"Where should I start?"*, *"Give me a hint"*, and *"Why did my test fail?"*.
+
+### 🚀 3. First-Mission Guided Onboarding Tour
+A welcoming 8-step onboarding walkthrough that greets first-time users before they touch the code editor:
+1. **Welcome to WORKUP**: Explains the simulated workplace concept.
+2. **Choose a Profession**: Select from Backend, Frontend, Data, Cloud, or ML.
+3. **Meet Your Simulated Team**: Introduces FinFlow Technologies, Alex Rivera (Senior Backend Lead), and ticket `FF-001`.
+4. **Understand Your Mission**: Outlines the task and expected outcomes.
+5. **Explore Your Cloud Workspace**: Highlights the File Explorer, Code Editor, Test Terminal, Mission Guidance Drawer, and AI Helpdesk.
+6. **Submit & Earn Evidence of Skill**: Explains how work is evaluated and verified.
+* Includes a **"Tour & Guide"** button in the workbench top bar to replay the walkthrough anytime.
+
+### 🎬 4. Interactive Mission Walkthrough Demo (`/demo`)
+A dedicated interactive video-style presentation showcasing the end-to-end experience:
+* **Interactive Controls**: Play/pause, scrubber timeline, speed toggles (1x, 1.5x, 2x), and chapter markers.
+* **6 Chapters**:
+  1. `0:00` — Welcome & Career Selection
+  2. `0:45` — Receiving Ticket FF-001 at FinFlow Technologies
+  3. `1:30` — Provisioning Isolated Cloud Workspace & Locating `validator.py`
+  4. `2:15` — Consulting AI Helpdesk (Quila) for Progressive Hints
+  5. `3:00` — Implementing Fix & Running Automated Pytest Suite
+  6. `3:45` — Submission & Earning Verified Evidence of Skill
+* Direct button to transition from the demo into the live cloud workspace.
+
+### ⚡ 5. Isolated Cloud Workspace Orchestration
+* **Secure Sandbox**: Ephemeral environments with isolated virtual directories, strict CPU/memory limits, execution timeouts, and secret shielding (platform credentials stripped from student sub-processes).
+* **Automated Test Runner**: 1-click test execution running `pytest` or `unittest` with real-time console feedback.
+* **Auto-Reaping**: Stale or idle workspaces are automatically decommissioned while preserving student deliverables in the artifact vault.
+
+### 🏆 6. AI Tech Lead Review & Verified Evidence of Skill (`/portfolio/[slug]`)
+* **Rubric-Driven Evaluation**: Submissions are evaluated against weighted, multi-criterion engineering rubrics.
+* **Tech Lead Review Letter**: Synthesizes persona-driven feedback (e.g. from Alex Rivera or Sarah Chen) highlighting strengths and areas for improvement.
+* **Cryptographic Evidence Dossier**: Successful submissions ($\ge 70\%$) mint an immutable, SHA-256 hashed portfolio credential with a public URL for recruiters to verify.
+
+### 📊 7. Admin & Author Dashboards & Mission Outcome Hub
+* **Admin Dashboard (`/admin`)**:
+  * Platform-wide metrics: Total missions, published, drafts, archived, total attempts, pass rate %, average score %.
+  * **Mission-Wise Learner Performance Table**: Attempts, pass rates, and average scores per mission.
+  * **Author-Wise Contributions Table**: Missions created, total learner attempts, and completions per author.
+* **Author Studio (`/admin` for `content_author`)**:
+  * Scoped strictly to missions authored by the logged-in author, preserving author privacy.
+* **Mission Outcome Tracking Hub (`/admin/outcomes`)**:
+  * Comprehensive outcome records across all learners: `Not Started`, `In Progress`, `Submitted`, `Under Review`, `Passed`, `Needs Improvement`, `Failed`.
+  * Detail modal inspecting test stdout/stderr, reviewer feedback, and final scores.
+
+---
+
+## 3. Beginner-Friendly Mission Collection (10–30 min each)
+
+| Ticket | Profession | Company & Dept | Mission Objective | Key Files |
+| :--- | :--- | :--- | :--- | :--- |
+| **FF-001** | **Backend Developer** | **FinFlow Technologies**<br>*(Backend Engineering)* | Fix login email validation accepting empty strings | `src/auth/validator.py`<br>`tests/test_validator.py` |
+| **NC-001** | **Frontend Developer** | **Nova Commerce**<br>*(Web UX Engineering)* | Fix broken checkout submit button locked in disabled state | `src/components/CheckoutButton.py`<br>`tests/test_checkout.py` |
+| **MLOG-001** | **Data Analyst** | **MetroLogistics**<br>*(Business Intelligence)* | Calculate delivery turnaround times and tally SLA-delayed packages | `src/analysis/delivery_metrics.py`<br>`data/deliveries.json` |
+| **DP-001** | **Python Developer** | **DataPulse Analytics**<br>*(Core Automation)* | Fix invoice tiered order discount calculation percentages | `src/calculator/discounts.py`<br>`tests/test_discounts.py` |
+| **SRC-001** | **Cloud Engineer** | **SkyRoute Cloud**<br>*(Cloud Infrastructure)* | Fix API gateway CORS configuration rejecting mobile clients | `config/gateway_cors.json`<br>`tests/test_cors.py` |
+| **VIQ-001** | **ML Engineer** | **VisionIQ Labs**<br>*(Applied AI)* | Implement prediction confidence threshold filter | `src/model/evaluator.py`<br>`tests/test_evaluator.py` |
+| **SP-001** | **QA Engineer** | **SecurePay Systems**<br>*(Quality Assurance)* | Author edge-case unit test suite for password policies | `src/registration.py`<br>`tests/test_registration.py` |
+| **COW-001** | **DevOps Engineer** | **CloudOps Works**<br>*(CI/CD Platform)* | Fix test error trapping script in CI automated build pipeline | `scripts/ci_test_runner.py`<br>`tests/test_ci.py` |
+
+*(Plus flagship multi-phase production tracks: **OmniRetail MLOps Drift Detection & Governance** and **FinFlow Webhook Idempotency & Latency Optimization**).*
+
+---
+
+## 4. Technology Stack
 
 * **Frontend:** Next.js 14 App Router, React 18, TypeScript, Tailwind CSS, Lucide Icons
-* **Backend / API:** Next.js Route Handlers (RESTful, typed APIs, Zod validation, structured error handling)
-* **Database & ORM:** Prisma ORM 5 with SQLite (`dev.db`) for instant zero-dependency local setup; seamless migration path to PostgreSQL for production
-* **Authentication:** Password hashing with `bcryptjs`, signed JWT sessions via `jose`, HTTP-only secure cookies, and password reset flows
-* **Authorization:** Role-Based Access Control (RBAC) supporting `student`, `content_author`, `reviewer`, and `administrator` roles
-* **Testing:** Vitest automated test suite with TypeScript path aliasing and unit/integration test suites
-* **CI/CD:** GitHub Actions workflow executing linting, migrations, database seeding, test runner, and production build checks
+* **Backend / API:** Next.js Route Handlers (28 RESTful typed endpoints, Zod validation)
+* **Database & ORM:** Prisma ORM 5 with SQLite (`dev.db`) for instant zero-dependency local setup
+* **AI Evaluation & Mentorship:** Built-in rule-based reasoning engine & AI Tech Lead evaluator with progressive hints and structured rubric scoring
+* **Authentication & RBAC:** Password hashing (`bcryptjs`), signed JWT sessions (`jose`), HTTP-only cookies, supporting `student`, `content_author`, `reviewer`, and `administrator` roles
+* **Testing:** Vitest automated test runner (11 test suites, 45 tests, 100% pass rate)
 
 ---
 
-## 3. Core Domain Entities
-
-The platform is architected to be completely domain-agnostic, supporting any future technical discipline (Software Engineering, AI/ML, Cloud/DevOps, Cybersecurity, Data Engineering) without hard-coding specific logic:
-
-1. **`User`**: System account with role (`student`, `content_author`, `reviewer`, `administrator`), status, and credential hashes.
-2. **`Profile`**: Developer portfolio profile, headline, bio, experience level, GitHub/LinkedIn links, and preferences.
-3. **`Session`**: Active authenticated session tokens with database revocation and expiration tracking.
-4. **`PasswordResetToken`**: Single-use time-limited tokens for secure password recovery.
-5. **`Profession`**: High-level engineering disciplines (e.g. *Software Engineering*, *AI & Machine Learning*).
-6. **`Role`**: Industry job titles within a profession (e.g. *Junior Backend Engineer*, *Associate MLOps Engineer*).
-7. **`Skill`**: Normalized technical competencies (e.g. *Python*, *FastAPI*, *PostgreSQL*, *Redis*, *MLflow*, *Docker*, *pytest*).
-8. **`RoleSkill`**: Many-to-many relationship mapping skills to roles.
-9. **`Company`**: Simulated employers (e.g. *FinFlow Technologies*, *OmniRetail Marketplace*) with size, culture, tech stack, and architecture overviews.
-10. **`Team`**: Engineering teams within companies with charters, tech leads, and communication channels.
-11. **`Simulation`**: Business scenario packages containing projects, difficulty ratings, and estimated hours.
-12. **`Project`**: Sprints within a simulation with business objectives and Architecture Decision Records (ADRs).
-13. **`Task`**: Individual tickets with ticket keys (e.g. `FF-104`, `OR-201`), types (`INVESTIGATION`, `IMPLEMENTATION`, `TESTING`, `CODE_REVIEW`, `DEPLOYMENT`, `MONITORING_INCIDENT`), and acceptance criteria.
-14. **`TaskSkill`**: Technical skills exercised by specific tasks.
-15. **`TaskDependency`**: Directed acyclic graph (DAG) specifying prerequisites and task blocking rules.
-16. **`Workspace`**: Cloud container session state and DevContainer configuration metadata.
-17. **`Submission`**: Pull request records, branch names, commit SHAs, and diff summaries.
-18. **`Evaluation`**: Automated AI Tech Lead or human reviewer rubric scores, line-level critiques, and approval status.
-19. **`PortfolioItem`**: Verified Evidence of Skill dossier showcasing completed simulations with audit trails.
-20. **`AuditLog`**: Immutable platform audit events recording user actions, IP addresses, and metadata.
-
----
-
-## 4. Local Development Setup
-
-Follow these exact steps to run the platform locally on your machine.
+## 5. Local Development Setup
 
 ### Prerequisites
-
 * **Node.js**: v18.18+ or v20+ or v22+
 * **npm**: v9+ or v10+
 * **Git**
 
 ### Step 1: Clone the Repository
-
 ```bash
-git clone <repository-url> workup
-cd workup
+git clone https://github.com/asam0001/WORKUP.git
+cd WORKUP
 ```
 
 ### Step 2: Configure Environment Variables
-
-Copy the example environment configuration:
-
+Copy the template configuration:
 ```bash
 cp .env.example .env
 ```
-
-The default `.env` configuration uses SQLite (`file:./dev.db`), requiring **zero external database setup**:
-
+Default `.env` configuration (zero external database configuration required):
 ```env
 DATABASE_URL="file:./dev.db"
 JWT_SECRET="workup-super-secret-dev-jwt-key-change-in-production-min-32-chars"
@@ -97,134 +146,151 @@ LOG_LEVEL="info"
 ```
 
 ### Step 3: Install Dependencies
-
 ```bash
 npm install
 ```
 
-### Step 4: Initialize the Database & Seed Data
-
-Generate the Prisma client, synchronize the schema, and seed the flagship simulation catalog:
-
+### Step 4: Initialize the Database & Seed Missions
+Generate Prisma Client, push the schema, and seed the mission catalog:
 ```bash
-# Generate client and sync SQLite schema
 npx prisma generate
 npx prisma db push
-
-# Seed initial users, professions, roles, companies, and simulations
 npm run seed
 ```
 
-### Step 5: Run the Development Server
-
+### Step 5: Start the Development Server
 ```bash
 npm run dev
 ```
+*(On Windows PowerShell where script execution is restricted, run: `npm.cmd run dev` or `node ./node_modules/next/dist/bin/next dev`)*
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 5. Default Demo Accounts
+## 6. Pre-seeded Demo Accounts
 
-The database seed provisions active test accounts for all four supported platform roles:
-
-| Role | Email | Password | Permissions |
+| Role | Email | Password | Access Capabilities |
 | :--- | :--- | :--- | :--- |
-| **Student** | `student@workup.dev` | `Password123` | View tracks, launch simulations, submit pull requests, edit profile |
-| **Administrator** | `admin@workup.dev` | `Password123` | Full access, view platform metrics, inspect system audit logs |
-| **Content Author** | `author@workup.dev` | `Password123` | Author and modify simulations, projects, tasks, and company scenarios |
-| **Reviewer** | `reviewer@workup.dev` | `Password123` | Inspect student submissions, score rubrics, approve/request changes |
+| **Student** | `student@workup.dev` | `Password123` | Career Explorer, Interactive Cloud Workbench, AI Helpdesk, Verified Portfolio |
+| **Administrator** | `admin@workup.dev` | `Password123` | Platform Administration, Mission Outcomes Hub, Workspace Fleet, Content Authoring |
+| **Content Author** | `author@workup.dev` | `Password123` | Author Studio, Authored Missions Performance Analytics, Mission Management |
+| **Reviewer** | `reviewer@workup.dev` | `Password123` | Submissions & Reviews, Manual Code Review Inspection |
 
-*(You can also register a brand-new account directly via `/auth/register`)*.
+*(You can also register a brand-new student account via `/auth/register`)*.
 
 ---
 
-## 6. Running the Automated Test Suite
+## 7. Automated Testing & Verification
 
-The test suite is powered by **Vitest** and tests authentication, role authorization, domain entity relationships, and schema validations:
-
+Run the full test suite with Vitest:
 ```bash
-# Run tests once
 npm test
+```
 
-# Run tests in watch mode
-npm run test:watch
+### Test Suite Coverage (100% Passing)
+```text
+✓ src/tests/helpdesk.test.ts (5 tests) — AI Helpdesk explanations, step guidance, progressive hints, error triage
+✓ src/tests/mission-outcomes.test.ts (3 tests) — Mission outcome tracking, status transitions, author scoping
+✓ src/tests/rbac.test.ts (4 tests) — Role-based access control matrix
+✓ src/tests/validation.test.ts (4 tests) — Input sanitization & schema validation
+✓ src/tests/validator.test.ts (6 tests) — Task validation engine & dependency cycles
+✓ src/tests/admin-authoring.test.ts (1 test) — Content authoring engine
+✓ src/tests/domain.test.ts (5 tests) — Relational domain integrity
+✓ src/tests/evaluation.test.ts (3 tests) — AI Tech Lead scoring & portfolio minting
+✓ src/tests/auth.test.ts (3 tests) — Password hashing & JWT sessions
+✓ src/tests/workspace-orchestrator.test.ts (4 tests) — Sandbox provisioning, concurrency limits, auto-reaping
+✓ src/tests/workspace-provider.test.ts (7 tests) — Process isolation, timeout enforcement, secret shielding
+
+Test Files: 11 passed (11)
+Tests:      45 passed (45)
+```
+
+### Clean Production Build Verification
+```bash
+npm run build
+```
+Compiled and prerendered 24 static/dynamic routes and 28 API endpoints with `0` errors.
+
+---
+
+## 8. Application Navigation & Route Structure
+
+```
+WORKUP Platform
+├── Learner Experience
+│   ├── /                          # Landing page with value proposition
+│   ├── /demo                      # Interactive 4-minute mission walkthrough demo
+│   ├── /careers                   # Career explorer & profession tracks
+│   ├── /careers/[slug]            # Role breakdown and technical backlog
+│   ├── /companies                 # Simulated companies & tech stacks directory
+│   ├── /resources                 # Zero-jargon engineering handbooks
+│   ├── /dashboard                 # Student workstation & active workspace alert
+│   ├── /workspaces/[id]           # Cloud workbench (Editor, Terminal, Mission Guidance, AI Helpdesk)
+│   ├── /submissions/[id]          # AI Tech Lead review letter & rubric scorecard
+│   └── /portfolio/[slug]          # Public cryptographically verified Evidence of Skill
+├── Staff & Administration
+│   ├── /admin                     # Platform administration & Author Studio
+│   ├── /admin/outcomes            # Mission Outcome Tracking Hub
+│   ├── /admin/authoring           # Mission & content authoring studio
+│   ├── /admin/submissions         # All submissions audit table
+│   └── /admin/workspaces          # Active workspace fleet & resource telemetry
+└── Authentication
+    ├── /auth/login                # Login with session cookie
+    ├── /auth/register             # Registration
+    └── /auth/reset-password       # Secure password reset flow
 ```
 
 ---
 
-## 7. Repository Structure
+## 9. Repository Structure
 
 ```
 workup/
-├── .github/
-│   └── workflows/
-│       └── ci.yml               # GitHub Actions CI workflow
 ├── prisma/
-│   ├── schema.prisma            # Complete 20-entity domain schema
-│   ├── seed.ts                  # Seed script with flagship enterprise tracks
-│   └── dev.db                   # Local SQLite database (git-ignored)
+│   ├── schema.prisma              # Domain schema (Missions, Outcomes, Helpdesk, Workspaces, Rubrics)
+│   ├── seed.ts                    # Database seeder with 8 beginner missions & sample outcomes
+│   └── dev.db                     # Local SQLite database
 ├── src/
 │   ├── app/
-│   │   ├── api/
-│   │   │   ├── auth/            # Auth endpoints (register, login, logout, me, reset)
-│   │   │   ├── professions/     # Professions & roles catalog API
-│   │   │   ├── simulations/     # Simulations & detailed slug API
-│   │   │   ├── profile/         # Profile management API
-│   │   │   └── admin/           # Platform stats and audit log APIs
-│   │   ├── auth/                # Auth pages (login, register, forgot/reset password)
-│   │   ├── dashboard/           # Student workstation dashboard
-│   │   ├── careers/             # Career explorer & profession views
-│   │   ├── simulations/         # Simulation detail, ADR, and task backlog
-│   │   ├── profile/             # User profile editing & portfolio
-│   │   ├── admin/               # Admin governance & audit logs
-│   │   ├── layout.tsx           # Global layout with Navbar, Footer, ErrorBoundary
-│   │   ├── page.tsx             # Interactive landing page
-│   │   ├── globals.css          # Tailwind CSS styling
-│   │   ├── error.tsx            # Global error boundary
-│   │   └── not-found.tsx        # 404 page
+│   │   ├── api/                   # 28 RESTful API route handlers
+│   │   │   ├── admin/             # Stats, outcomes, authoring, workspaces, and audit APIs
+│   │   │   ├── auth/              # Login, register, logout, me, reset-password
+│   │   │   ├── helpdesk/          # Contextual AI Helpdesk chat endpoint
+│   │   │   ├── portfolio/         # Public recruiter verification API
+│   │   │   └── workspaces/        # Provisioning, execute, test, snapshot, submit APIs
+│   │   ├── admin/                 # Administration, Author Studio, and Outcomes Hub
+│   │   ├── careers/               # Career tracks and role details
+│   │   ├── companies/             # Simulated company profiles and engineering teams
+│   │   ├── dashboard/             # Learner workstation dashboard
+│   │   ├── demo/                  # Interactive mission walkthrough demo
+│   │   ├── portfolio/             # Verified Evidence of Skill dossiers
+│   │   ├── resources/             # Engineering handbooks and tutorials
+│   │   ├── simulations/           # Simulation details and ticket backlogs
+│   │   ├── submissions/           # AI Tech Lead review letters and scorecards
+│   │   └── workspaces/            # Cloud workbench (Editor, Terminal, Guidance, Helpdesk)
 │   ├── components/
-│   │   ├── navbar.tsx           # Session-aware navigation bar
-│   │   ├── footer.tsx           # Platform footer & loop diagram
-│   │   ├── error-boundary.tsx   # React ErrorBoundary component
-│   │   ├── role-badge.tsx       # RBAC role chip component
-│   │   ├── profession-card.tsx  # Career discipline preview card
-│   │   └── simulation-card.tsx  # Enterprise simulation card
+│   │   ├── ai-helpdesk.tsx        # Floating AI Helpdesk (Quila) component
+│   │   ├── mission-guidance.tsx   # Mission Guidance drawer component
+│   │   ├── first-mission-onboarding.tsx # Guided onboarding tour modal
+│   │   ├── mission-demo-player.tsx # Interactive video walkthrough player
+│   │   ├── navbar.tsx             # Responsive platform navigation bar
+│   │   └── role-badge.tsx         # RBAC role chip component
 │   ├── lib/
-│   │   ├── env.ts               # Zod-validated environment configuration
-│   │   ├── logger.ts            # Structured JSON logger
-│   │   ├── prisma.ts            # Singleton Prisma client instance
-│   │   ├── auth.ts              # Password hashing, JWT sessions, cookies
-│   │   ├── rbac.ts              # Role-Based Access Control matrix
-│   │   ├── api-response.ts      # Typed API response & error formatters
-│   │   └── utils.ts             # Styling & date utilities
-│   ├── types/
-│   │   └── index.ts             # Domain models, enums, and Zod schemas
-│   └── tests/
-│       ├── auth.test.ts         # Password hashing & JWT session tests
-│       ├── rbac.test.ts         # Role permission & guard tests
-│       ├── domain.test.ts       # Database relationships & constraints
-│       └── validation.test.ts   # Input sanitization & password complexity
-├── .env.example                 # Documented environment variables template
-├── package.json                 # Project dependencies & scripts
-├── tsconfig.json                # TypeScript compiler configuration
-├── next.config.mjs              # Next.js production configuration
-├── tailwind.config.ts           # Tailwind CSS configuration
-└── vitest.config.ts             # Vitest test runner configuration
+│   │   ├── evaluation/            # AI Tech Lead rubric scoring & portfolio minting
+│   │   ├── helpdesk/              # Assistant logic, progressive hints, and error triage
+│   │   ├── workspace/             # Workspace orchestrator & isolated sandbox provider
+│   │   ├── auth.ts                # Session management & password hashing
+│   │   ├── rbac.ts                # Role permissions matrix
+│   │   └── prisma.ts              # Database client singleton
+│   └── tests/                     # 11 Vitest test suites (45 tests)
+├── package.json
+└── tsconfig.json
 ```
 
 ---
 
-## 8. Verification of Acceptance Criteria
+## 10. License
 
-All Phase 1 foundational acceptance criteria are fully met:
-
-1. **Clone the repository:** Clean, self-contained repository with standard npm scripts.
-2. **Configure environment variables:** `.env.example` provided with secure defaults.
-3. **Run the application locally:** `npm run dev` boots Next.js at `http://localhost:3000`.
-4. **Create an account:** `/auth/register` creates verified users with selected roles.
-5. **Log in:** `/auth/login` verifies credentials, writes secure HTTP-only cookies, and redirects to `/dashboard`.
-6. **View available professions:** `/careers` lists professions, roles, and skills.
-7. **View a simulation:** `/simulations/payment-webhook-idempotency-and-optimization` presents the full business scenario, ADR, team topology, and task backlog.
-8. **Run the automated test suite:** `npm test` runs 15 passing tests across 4 test suites.
+Private prototype developed for the **[workup] Virtual Professional Experience Platform**.
+All rights reserved.
